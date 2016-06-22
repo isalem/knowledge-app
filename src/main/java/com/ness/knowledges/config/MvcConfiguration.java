@@ -12,7 +12,6 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
-@ComponentScan(basePackages="com.ness.knowledges")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
