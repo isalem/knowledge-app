@@ -1,22 +1,24 @@
 package com.ness.knowledges.domain;
 
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "knowledges")
-public class Knowledge {
-	
+@Table(name = "areas")
+public class Area {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long areaId;
 	
 	@Column(name = "title", nullable = false, length = 100)
 	private String title;
@@ -24,51 +26,49 @@ public class Knowledge {
 	@Column(name = "description", length = 500)
 	private String description;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "areaId")
-	private Area area;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Collection<Knowledge> knowledges;
 	
-	public Knowledge() { }
+	public Area() { }
 	
-	public Knowledge(String title) {
+	public Area(String title) {
 		this(title, null);
 	}
-	
-	public Knowledge(String title, String description) {
+	public Area(String title, String description) {
 		this.title = title;
 		this.description = description;
 	}
-	
+
 	public Long getId() {
-		return id;
+		return areaId;
 	}
-	
+
 	public void setId(Long id) {
-		this.id = id;
+		this.areaId = id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Area getArea() {
-		return area;
+	public Collection<Knowledge> getKnowledges() {
+		return knowledges;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public void setKnowledges(Collection<Knowledge> knowledges) {
+		this.knowledges = knowledges;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class Knowledge {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Knowledge other = (Knowledge) obj;
+		Area other = (Area) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
