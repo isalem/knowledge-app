@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Create new profile</title>
+</head>
+<body>
+    <h1>Create new profile</h1>
+    <form action="#" th:action="@{/user/create}" th:object="${newUser}" method="post">
+        <ul>
+            <li>
+                <label for="firstName">First name: </label>
+                <input type="text" th:field="*{firstName}" />
+            </li>
+            <li>
+                <label for="lastName">Last name: </label>
+                <input type="text" th:field="*{lastName}" />
+            </li>
+            <li>
+                <label for="email">Email: </label>
+                <input type="email" th:field="*{email}" />
+            </li>
+            <li>
+                <label for="username">Username: </label>
+                <input type="text" th:field="*{username}" />
+            </li>
+            <li>
+                <label for="password">Password: </label>
+                <input type="password" th:field="*{password}" />
+            </li>
+            <li>
+                <label for="role">Role: </label>
+                <select th:field="*{role}">
+                    <option th:each="role : ${T(com.ness.knowledges.security.UserRole).values()}" th:value="${role}" th:text="${role.getDescription()}"></option>
+                </select>
+            </li>
+        </ul>
+        <input type="submit" value="Create" />
+    </form>
+</body>
+</html>
