@@ -17,9 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.ness.knowledges.config.ApplicationConfiguration;
-import com.ness.knowledges.persistent.model.Area;
-import com.ness.knowledges.persistent.model.Knowledge;
-import com.ness.knowledges.persistent.model.User;
+import com.ness.knowledges.persistent.model.AreaEntity;
+import com.ness.knowledges.persistent.model.KnowledgeEntity;
+import com.ness.knowledges.persistent.model.UserEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -38,12 +38,12 @@ public class PersistentModelTest {
 	
 	@Test
 	public void completeTest() {
-		User foo = new User("Foo", "Bar");
-		Area java = new Area("Java");
+		UserEntity foo = new UserEntity("Foo", "Bar");
+		AreaEntity java = new AreaEntity("Java");
 		
-		Knowledge spring = new Knowledge("Spring");
+		KnowledgeEntity spring = new KnowledgeEntity("Spring");
 		spring.setArea(java);
-		Knowledge jpa = new Knowledge("Jpa");
+		KnowledgeEntity jpa = new KnowledgeEntity("Jpa");
 		jpa.setArea(java);
 		
 		java.setKnowledges(Arrays.asList(spring, jpa));
@@ -65,50 +65,50 @@ public class PersistentModelTest {
 	
 	@Test
 	public void saveKnowledgeTest() {
-		Knowledge java = new Knowledge("Java", "Java programming language");
+		KnowledgeEntity java = new KnowledgeEntity("Java", "Java programming language");
 		knowledgeRepository.save(java);
 		assertThat(knowledgeRepository.count(), equalTo(1L));
 	}
 	
 	@Test
 	public void updateKnowledgeTest() {
-		Knowledge java = new Knowledge("Java", "Java programming language");
+		KnowledgeEntity java = new KnowledgeEntity("Java", "Java programming language");
 		knowledgeRepository.save(java);
 		
-		Knowledge javaFromDb = knowledgeRepository.findKnowledgeByTitle("Java");
+		KnowledgeEntity javaFromDb = knowledgeRepository.findKnowledgeByTitle("Java");
 		javaFromDb.setDescription("Nope");
 		knowledgeRepository.save(javaFromDb);
 		
-		Knowledge expectedJava = new Knowledge("Java", "Nope");
+		KnowledgeEntity expectedJava = new KnowledgeEntity("Java", "Nope");
 		javaFromDb = knowledgeRepository.findKnowledgeByTitle("Java");
 		assertEquals(expectedJava, javaFromDb);
 	}
 	
 	@Test
 	public void findKnowledgeByTitleTest() {
-		Knowledge java = new Knowledge("Java", "Java programming language");
+		KnowledgeEntity java = new KnowledgeEntity("Java", "Java programming language");
 		knowledgeRepository.save(java);
-		Knowledge javaFromDb = knowledgeRepository.findKnowledgeByTitle("Java");
+		KnowledgeEntity javaFromDb = knowledgeRepository.findKnowledgeByTitle("Java");
 		assertEquals(java, javaFromDb);
 	}
 	
 	@Test
 	public void saveUserWithKnowledgesTest() {
-		User user = new User();
+		UserEntity user = new UserEntity();
 		user.setFirstName("Foo");
 		user.setLastName("Bar");
 		user.setEmail("foo.bar@mail.com");
 		
-		Knowledge java = new Knowledge("Java", "Java");
+		KnowledgeEntity java = new KnowledgeEntity("Java", "Java");
 		user.setKnowledges(Arrays.asList(java));
 		
 		knowledgeRepository.save(java);
 		userRepository.save(user);
 		
-		User userFromDb = userRepository.findUserByEmail("foo.bar@mail.com");
+		UserEntity userFromDb = userRepository.findUserByEmail("foo.bar@mail.com");
 		Assert.assertThat(userFromDb.getKnowledges().size(), Matchers.equalTo(1));
 		
-		Knowledge javaFromDb = userFromDb.getKnowledges().stream().findFirst().get();
+		KnowledgeEntity javaFromDb = userFromDb.getKnowledges().stream().findFirst().get();
 		
 		Assert.assertEquals(java, javaFromDb);
 	}

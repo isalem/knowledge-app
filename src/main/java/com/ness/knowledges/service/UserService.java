@@ -1,17 +1,10 @@
 package com.ness.knowledges.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ness.knowledges.persistent.UserRepository;
-import com.ness.knowledges.persistent.model.CustomUserDetails;
-import com.ness.knowledges.persistent.model.User;
+import com.ness.knowledges.persistent.model.UserEntity;
 
 @Service
 public class UserService {
@@ -27,11 +20,11 @@ public class UserService {
 //		}
 //	}
 	
-	public User findUserById(Long id) {
+	public UserEntity findUserById(Long id) {
 		return userRepository.findOne(id);
 	}
 	
-	public void saveUser(User user) {
+	public void saveUser(UserEntity user) {
 		userRepository.save(user);
 	}
 }

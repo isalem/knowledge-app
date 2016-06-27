@@ -22,7 +22,7 @@ import com.ness.knowledges.security.UserRole;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable, UserDetails {
+public class UserEntity implements Serializable, UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -40,11 +40,11 @@ public class User implements Serializable, UserDetails {
 	private UserRole role;
 	
 	@OneToMany(fetch = FetchType.EAGER)
-	private Collection<Knowledge> knowledges;
+	private Collection<KnowledgeEntity> knowledges;
 	
-	public User() { }
+	public UserEntity() { }
 	
-	public User(String firstName, String lastName) {
+	public UserEntity(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -105,11 +105,11 @@ public class User implements Serializable, UserDetails {
 		this.role = role;
 	}
 
-	public Collection<Knowledge> getKnowledges() {
+	public Collection<KnowledgeEntity> getKnowledges() {
 		return knowledges;
 	}
 
-	public void setKnowledges(Collection<Knowledge> knowledges) {
+	public void setKnowledges(Collection<KnowledgeEntity> knowledges) {
 		this.knowledges = knowledges;
 	}
 

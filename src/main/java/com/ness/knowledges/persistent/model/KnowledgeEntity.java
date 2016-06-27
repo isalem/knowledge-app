@@ -1,27 +1,26 @@
 package com.ness.knowledges.persistent.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "areas")
-public class Area implements Serializable {
-
+@Table(name = "knowledges")
+public class KnowledgeEntity implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long areaId;
+	private Long id;
 	
 	@Column(name = "title", nullable = false, length = 100)
 	private String title;
@@ -29,49 +28,51 @@ public class Area implements Serializable {
 	@Column(name = "description", length = 500)
 	private String description;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Collection<Knowledge> knowledges;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "areaId")
+	private AreaEntity area;
 	
-	public Area() { }
+	public KnowledgeEntity() { }
 	
-	public Area(String title) {
+	public KnowledgeEntity(String title) {
 		this(title, null);
 	}
-	public Area(String title, String description) {
+	
+	public KnowledgeEntity(String title, String description) {
 		this.title = title;
 		this.description = description;
 	}
-
+	
 	public Long getId() {
-		return areaId;
+		return id;
 	}
-
+	
 	public void setId(Long id) {
-		this.areaId = id;
+		this.id = id;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
-
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Collection<Knowledge> getKnowledges() {
-		return knowledges;
+	public AreaEntity getArea() {
+		return area;
 	}
 
-	public void setKnowledges(Collection<Knowledge> knowledges) {
-		this.knowledges = knowledges;
+	public void setArea(AreaEntity area) {
+		this.area = area;
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class Area implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Area other = (Area) obj;
+		KnowledgeEntity other = (KnowledgeEntity) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
