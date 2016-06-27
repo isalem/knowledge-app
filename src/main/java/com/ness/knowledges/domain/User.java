@@ -1,8 +1,13 @@
 package com.ness.knowledges.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +15,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.ness.knowledges.security.UserRole;
+
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable, UserDetails {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +35,9 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
-	private String role;
+	
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	private Collection<Knowledge> knowledges;
@@ -34,8 +48,6 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -85,11 +97,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
@@ -99,5 +111,32 @@ public class User {
 
 	public void setKnowledges(Collection<Knowledge> knowledges) {
 		this.knowledges = knowledges;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(this.getRole());
+		return authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }

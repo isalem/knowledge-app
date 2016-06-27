@@ -7,4 +7,5 @@ import com.ness.knowledges.domain.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	User findUserByEmail(String email);
 	User findUserByFirstName(String firstName);
+	User findUserByUsername(String username);
 }

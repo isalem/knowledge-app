@@ -1,5 +1,6 @@
 package com.ness.knowledges.domain;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -14,8 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "areas")
-public class Area {
+public class Area implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long areaId;
