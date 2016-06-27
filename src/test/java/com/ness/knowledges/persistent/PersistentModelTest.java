@@ -17,15 +17,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.ness.knowledges.config.ApplicationConfiguration;
-import com.ness.knowledges.domain.Area;
-import com.ness.knowledges.domain.Knowledge;
-import com.ness.knowledges.domain.User;
+import com.ness.knowledges.persistent.model.Area;
+import com.ness.knowledges.persistent.model.Knowledge;
+import com.ness.knowledges.persistent.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ApplicationConfiguration.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-public class PersistentTest {
+public class PersistentModelTest {
 
 	@Autowired
 	KnowledgeRepository knowledgeRepository;

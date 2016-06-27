@@ -1,4 +1,4 @@
-package com.ness.knowledges.domain;
+package com.ness.knowledges.persistent.model;
 
 import java.util.Collection;
 

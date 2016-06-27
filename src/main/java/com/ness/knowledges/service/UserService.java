@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.ness.knowledges.domain.CustomUserDetails;
-import com.ness.knowledges.domain.User;
 import com.ness.knowledges.persistent.UserRepository;
+import com.ness.knowledges.persistent.model.CustomUserDetails;
+import com.ness.knowledges.persistent.model.User;
 
 @Service
 public class UserService {

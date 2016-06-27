@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ness.knowledges.domain.User;
 import com.ness.knowledges.persistent.UserRepository;
+import com.ness.knowledges.persistent.model.User;
 
 @Controller
 @RequestMapping("/user")
