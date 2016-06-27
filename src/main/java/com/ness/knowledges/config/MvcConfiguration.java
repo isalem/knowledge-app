@@ -1,7 +1,6 @@
 package com.ness.knowledges.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -21,6 +20,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".html");
 		resolver.setTemplateMode("HTML5");
+		resolver.setCacheable(false);
 		return resolver;
 	}
 	
@@ -35,6 +35,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine);
+		viewResolver.setCache(false);
 		return viewResolver;
 	}
 	
