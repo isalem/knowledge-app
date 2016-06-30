@@ -1,77 +1,81 @@
-package com.ness.knowledges.persistent.model;
+package com.ness.knowledges.domain;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "knowledges")
-public class KnowledgeEntity implements Serializable {
+public class Knowledge {
+
+	public static Knowledge getEmtyKnowledgeForArea(Area area) {
+		Knowledge instanse = new Knowledge();
+		instanse.setArea(area);
+		return instanse;
+	}
 	
-	private static final long serialVersionUID = 1L;
+	public static Knowledge getEmtyKnowledge() {
+		return new Knowledge();
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Column(name = "knowledge_id")
+	private Long knowledgeId;
 	
-	@Column(name = "title", nullable = false, length = 100)
+	@NotNull
+	@Length(max = 100)
+	@Column(nullable = false, length = 100)
 	private String title;
 	
-	@Column(name = "description", length = 500)
+	@Length(max = 500)
+	@Column(length = 500)
 	private String description;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "areaId")
-	private AreaEntity area;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "area_id", referencedColumnName = "area_id")
+	private Area area;
 	
-	public KnowledgeEntity() { }
-	
-	public KnowledgeEntity(String title) {
-		this(title, null);
-	}
-	
-	public KnowledgeEntity(String title, String description) {
+	public Knowledge(String title, String description, Area area) {
 		this.title = title;
 		this.description = description;
+		this.area = area;
+	}
+
+	public Knowledge(String title, String description) {
+		this(title, description, null);
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
+	public Knowledge() { }
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public AreaEntity getArea() {
+	public Area getArea() {
 		return area;
 	}
 
-	public void setArea(AreaEntity area) {
+	public void setArea(Area area) {
 		this.area = area;
 	}
 
@@ -92,7 +96,7 @@ public class KnowledgeEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		KnowledgeEntity other = (KnowledgeEntity) obj;
+		Knowledge other = (Knowledge) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;

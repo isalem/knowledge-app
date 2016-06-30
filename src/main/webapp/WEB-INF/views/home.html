@@ -7,6 +7,10 @@
     </head>
     <body>
         <h1>Knowledges application</h1>
-        <a th:href="@{/user/create}">Create new profile</a>
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{'/user/' + ${#authentication.name}}">Your profile</a>
+        </div>
+        <a th:href="@{/user/create}">Create new profile</a><br />
+        <a th:href="@{/login}">Login</a>
     </body>
 </html>

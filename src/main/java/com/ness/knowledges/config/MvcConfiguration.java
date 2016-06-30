@@ -1,14 +1,22 @@
 package com.ness.knowledges.config;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import com.ness.knowledges.util.StringToGrantedAuthorityConverter;
 
 @Configuration
 @EnableWebMvc
@@ -28,6 +36,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public SpringTemplateEngine templateEngine(ServletContextTemplateResolver resolver) {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setTemplateResolver(resolver);
+		
+		Set<IDialect> additionalDialects = new HashSet<>();
+		additionalDialects.add(new SpringSecurityDialect());
+		
+		engine.setAdditionalDialects(additionalDialects);
 		return engine;
 	}
 	
@@ -42,6 +55,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		super.addFormatters(registry);
+		registry.addConverter(new StringToGrantedAuthorityConverter());
 	}
 
 	

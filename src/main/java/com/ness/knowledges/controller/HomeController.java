@@ -1,18 +1,26 @@
 package com.ness.knowledges.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-
-	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping("/")
-	public String test() {
-		log.info("Showing hello page");
-		return "home";
+	public String test(Principal principal, Model model) {
+		if (principal == null) {
+			model.addAttribute("username", "Anonimous");
+		} else {
+			model.addAttribute("username", principal.getName());
+		}
+		return "home/home";
+	}
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "home/login";
 	}
 }

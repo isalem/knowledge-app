@@ -1,13 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>User page</title>
+    <title>Knowledges</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
-    <div th:object="${user}">
-        <label th:text="*{firstName}"></label>
+    <div class="container" th:object="${user}">
+        <div th:replace="fragments/header :: header"></div>
+        
+        <h1>Hello, <label th:text="*{name}"></label></h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Your personal information</h3>
+                <table class="table">
+		            <tr>
+		                <td>Name: </td>
+		                <td th:text="*{name}"></td>
+		            </tr>
+		            <tr>
+		                <td>Email: </td>
+		                <td th:text="*{email}"></td>
+		            </tr>
+		            <tr>
+		                <td>Username: </td>
+		                <td th:text="*{username}"></td>
+		            </tr>
+		            <tr>
+		                <td>Role: </td>
+		                <td th:text="*{authoritie.getDescription()}"></td>
+		            </tr>
+                </table>
+                <a th:href="@{'/user/edit/' + *{username}}">Edit profile</a>
+            </div>
+            <div class="col-md-4">
+               <h3>Your knowledges</h3>
+               <div th:unless="${isEmptyKnowledges}">
+	               <div class="panel panel-default" th:each="area : ${knowledgesGropedByAreaTitle}">
+	                  <div class="panel-heading" th:text="${area.key}">Area title</div>
+	                  <div class="panel-body">
+	                     <ul class="list-group" th:each="knowledge : ${area.value}">
+	                       <li class="list-group-item" th:text="${knowledge.title}">Knowledge title</li>
+	                     </ul>
+	                  </div>
+	               </div>
+               </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

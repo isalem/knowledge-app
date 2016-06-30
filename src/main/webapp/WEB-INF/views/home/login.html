@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign in</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form-signin" action="#" th:action="@{/login}" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                Invalid username and password.
+            </div>
+             <div th:if="${param.logout}" class="alert alert-success" role="alert"> 
+                You have been logged out.
+            </div>
+            <label for="username" class="sr-only">Username</label>
+            <input id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="" type="text" />
+            <label for="password" class="sr-only">Password</label>
+            <input id="password" name="password" class="form-control" placeholder="Password" required="" type="password" />
+            <!-- 
+            <div class="checkbox">
+                <label>
+                    <input value="remember-me" type="checkbox"> Remember me
+                </label>
+            </div>
+            -->
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      
+        </form>
+    </div>
+
+</body>
+</html>

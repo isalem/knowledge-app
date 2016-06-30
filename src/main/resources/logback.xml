@@ -13,6 +13,10 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
+	<logger name="org.mockito" level="trace" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+	
 	<logger name="com.ness.knowledges" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>

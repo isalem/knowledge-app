@@ -7,35 +7,38 @@
 </head>
 <body>
     <h1>Create new profile</h1>
-    <form action="#" th:action="@{/user/create}" th:object="${newUser}" method="post">
-        <ul>
-            <li>
-                <label for="firstName">First name: </label>
-                <input type="text" th:field="*{firstName}" />
-            </li>
-            <li>
-                <label for="lastName">Last name: </label>
-                <input type="text" th:field="*{lastName}" />
-            </li>
-            <li>
-                <label for="email">Email: </label>
-                <input type="email" th:field="*{email}" />
-            </li>
-            <li>
-                <label for="username">Username: </label>
-                <input type="text" th:field="*{username}" />
-            </li>
-            <li>
-                <label for="password">Password: </label>
-                <input type="password" th:field="*{password}" />
-            </li>
-            <li>
-                <label for="role">Role: </label>
-                <select th:field="*{role}">
-                    <option th:each="role : ${T(com.ness.knowledges.security.UserRole).values()}" th:value="${role}" th:text="${role.getDescription()}"></option>
-                </select>
-            </li>
-        </ul>
+    <form action="#" th:action="@{/user/create}" th:object="${user}" method="post">
+        <table>
+            <tr>
+                <td><label for="name">Name: </label></td>
+                <td><input type="text" th:field="*{name}" /></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</td>
+            </tr>
+            <tr>
+                <td><label for="email">Email: </label></td>
+                <td><input type="email" th:field="*{email}" /></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</td>
+            </tr>
+            <tr>
+                <td><label for="username">Username: </label></td>
+                <td><input type="text" th:field="*{username}" /></td>
+                <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</td>
+            </tr>
+            <tr>
+                <td><label for="password">Password: </label></td>
+                <td><input type="password" th:field="*{password}" /></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</td>
+            </tr>
+            <tr>
+                <td><label for="authoritie">Role: </label></td>
+                <td>
+                    <select th:field="*{authoritie}">
+                        <option th:each="authoritie : ${T(com.ness.knowledges.security.UserRole).values()}" th:value="${authoritie}" th:text="${authoritie.getDescription()}"></option>
+                    </select>
+                </td>
+                <td th:if="${#fields.hasErrors('authoritie')}" th:errors="*{authoritie}">Authoritie error</td>
+            </tr>
+        </table>
         <input type="submit" value="Create" />
     </form>
 </body>
