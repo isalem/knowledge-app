@@ -73,17 +73,6 @@ public class KnowledgeController extends BaseController {
 		return "redirect:/knowledge/area/" + areaTitle;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String showKnowledgesEditPage(Model model) {
-		
-		List<Area> allAreas = areaService.findAllAreas();
-		List<Knowledge> allKnowledges = knowledgeService.findAll();
-		
-		model.addAttribute("editAreasAndKnowledgesForm", new EditAreasAndKnowledgesForm(allAreas, allKnowledges));
-		
-		return "knowledge/edit";
-	}
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ResponseEntity<String> editKnowledge(@ModelAttribute EditKnowledgeForm body) {
 		Knowledge knowledge = knowledgeService.findKnowledgeById(body.getPk());
