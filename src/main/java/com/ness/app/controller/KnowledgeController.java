@@ -42,7 +42,7 @@ public class KnowledgeController extends BaseController {
 		model.addAttribute("areas", areas);
 		model.addAttribute("isAreasEmpty", isAreasEmpty);
 		
-		return "knowledge/home";
+		return "knowledge/area";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -64,7 +64,7 @@ public class KnowledgeController extends BaseController {
 		model.addAttribute("newKnowledge", Knowledge.getEmtyKnowledge());
 		model.addAttribute("activeArea", area.getTitle());
 		model.addAttribute("knowledges", area.getKnowledges());
-		return "knowledge/area";
+		return "knowledge/knowledge";
 	}
 	
 	@RequestMapping(value = "/area/{areaTitle:.+}", method = RequestMethod.POST)
