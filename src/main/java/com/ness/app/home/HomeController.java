@@ -1,4 +1,4 @@
-package com.ness.knowledges.controller;
+package com.ness.app.home;
 
 import java.security.Principal;
 
@@ -6,16 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ness.app.util.BaseController;
+
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 	
 	@RequestMapping("/")
 	public String test(Principal principal, Model model) {
-		if (principal == null) {
-			model.addAttribute("username", "Anonimous");
-		} else {
-			model.addAttribute("username", principal.getName());
-		}
 		return "home/home";
 	}
 	
