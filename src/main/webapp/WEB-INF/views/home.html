@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Knowledges Home</title>
-    </head>
-    <body>
-        <h1>Knowledges application</h1>
-        <div th:if="${#authorization.expression('isAuthenticated()')}">
-            <a th:href="@{'/user/' + ${#authentication.name}}">Your profile</a>
-        </div>
-        <a th:href="@{/user/create}">Create new profile</a><br />
-        <a th:href="@{/login}">Login</a>
-    </body>
+<head>
+    <title>Knowledges Home</title>
+    <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
+</head>
+<body>
+    <h1>Knowledges application</h1>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a th:href="@{'/user/' + ${#authentication.name}}">Your profile</a>
+    </div>
+    <a th:href="@{/user/create}">Create new profile</a><br />
+    <a th:href="@{/login}">Login</a>
+</body>
 </html>

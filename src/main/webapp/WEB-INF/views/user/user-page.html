@@ -3,12 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
       
 <head>
-    <title>Knowledges</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <title>User page</title>
+    <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
 <body>
@@ -37,18 +33,16 @@
 		                <td th:text="*{authoritie.getDescription()}"></td>
 		            </tr>
                 </table>
-                <a th:href="@{'/user/edit/' + *{username}}">Edit profile</a>
+                <a class="btn btn-default" href="#" th:href="@{/settings(editableUser=*{username})}" role="button">Edit</a>
             </div>
             <div class="col-md-4">
                <h3>Your knowledges</h3>
                <div th:unless="${isEmptyKnowledges}">
 	               <div class="panel panel-default" th:each="area : ${knowledgesGropedByAreaTitle}">
 	                  <div class="panel-heading" th:text="${area.key}">Area title</div>
-	                  <div class="panel-body">
-	                     <ul class="list-group" th:each="knowledge : ${area.value}">
-	                       <li class="list-group-item" th:text="${knowledge.title}">Knowledge title</li>
+	                     <ul class="list-group">
+	                       <li class="list-group-item" th:each="knowledge : ${area.value}" th:text="${knowledge.title}">Knowledge title</li>
 	                     </ul>
-	                  </div>
 	               </div>
                </div>
             </div>

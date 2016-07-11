@@ -6,10 +6,10 @@
 <body>
     <!--/*  Multiple fragments may be defined in one file */-->
 
-    <form th:fragment="login" th:action="@{/login}" th:method="get">
+    <form th:fragment="login" th:action="@{/login}" th:method="get" class="navbar-form navbar-riht">
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Login</button>
     </form>
-    <form th:fragment="logout" th:action="@{/logout}" th:method="post">
+    <form th:fragment="logout" th:action="@{/logout}" th:method="post" class="navbar-form navbar-riht">
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Logout</button>
     </form>
 </body>

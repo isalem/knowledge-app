@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      
+<head>
+    <title>Knowledges settings</title>
+    <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
+</head>
+
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header"></div>
+		
+		<div class="row">
+			<div class="col-md-2">
+				<ul th:replace="fragments/settings-navigation :: settings-navigation"></ul>
+			</div>
+			<div class="col-md-10">
+				<h3>Edit yours knowledges</h3>
+                <form th:action="@{/settings/knowledges(editableUser=${editableUser})}" th:object="${knowledgesSettingsForm}" method="post">
+                	<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
+						Input error
+					</div>
+					<div class="alert alert-success" th:if="${userUpdated}">
+						Saved successful
+					</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Know</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="knowledge, stat : *{knowledges}">
+                                <td th:text="${knowledge.title}"></td>
+                                <td> 
+                                    <input type="checkbox" th:field="*{knowledges[__${stat.index}__].selected}" /> 
+                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].title}" /> 
+                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].knowledgeId}" />
+                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].area}" /> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default">Save</button>
+                </form>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
