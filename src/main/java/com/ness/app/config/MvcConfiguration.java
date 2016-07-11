@@ -17,7 +17,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
-import com.ness.app.util.StringToGrantedAuthorityConverter;
+import com.ness.app.helper.StringToGrantedAuthorityConverter;
 
 @Configuration
 @EnableWebMvc
