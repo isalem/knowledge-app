@@ -12,8 +12,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	User findUserByName(String name);
 	User findUserByUsername(String username);
 	
-	@Query("from User u "
+	@Query("select u "
+		 + "from User u "
 		 + "join u.knowledges k "
 		 + "where k.title = ?1")
-	List<Object[]> findAllUsersWithKnowledge(String knowledTitle);
+	List<User> findAllUsersWithKnowledge(String knowledTitle);
 }

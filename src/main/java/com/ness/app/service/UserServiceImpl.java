@@ -111,12 +111,7 @@ public class UserServiceImpl implements UserService {
 		Set<User> result = new HashSet<>();
 		for (String knowledge : knowledges) {
 			
-			List<Object[]> temp = userRepository.findAllUsersWithKnowledge(knowledge);
-			
-			Set<User> users = temp.stream()
-				.map(o -> o[0])
-				.map(o -> (User)o)
-				.collect(Collectors.toSet());
+			List<User> users = userRepository.findAllUsersWithKnowledge(knowledge);
 			
 			result.addAll(users);
 			
