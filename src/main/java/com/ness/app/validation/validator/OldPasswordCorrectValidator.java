@@ -24,7 +24,7 @@ public class OldPasswordCorrectValidator implements ConstraintValidator<OldPassw
 
 	@Override
 	public void initialize(OldPasswordCorrect constraintAnnotation) {
-		//Nothing to do here
+		// Nothing to do here
 	}
 
 	@Override

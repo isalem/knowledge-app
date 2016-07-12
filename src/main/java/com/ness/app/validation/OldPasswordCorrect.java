@@ -14,7 +14,7 @@ import com.ness.app.validation.validator.OldPasswordCorrectValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = OldPasswordCorrectValidator.class)
 public @interface OldPasswordCorrect {
-	String message() default "{com.ness.app.util.OldPasswordCorrect.message}";
+	String message() default "{com.ness.app.validation.OldPasswordCorrect.message}";
 
 	Class<?>[] groups() default { };
 
