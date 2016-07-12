@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ness.app.domain.model.User;
 import com.ness.app.service.UserService;
-import com.ness.app.veiw.PasswordSettingsForm;
+import com.ness.app.view.PasswordSettingsForm;
 
 public class OldPasswordCorrectValidator implements ConstraintValidator<OldPasswordCorrect, PasswordSettingsForm> {
 

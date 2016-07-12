@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ness.app.domain.model.User;
 import com.ness.app.domain.wrapper.KnowledgeWithSelection;
-import com.ness.app.veiw.PasswordSettingsForm;
-import com.ness.app.veiw.ProfileSettingsForm;
+import com.ness.app.view.PasswordSettingsForm;
+import com.ness.app.view.ProfileSettingsForm;
 
 @Service
 public interface UserService extends UserDetailsService {

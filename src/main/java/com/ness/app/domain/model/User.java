@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ness.app.veiw.CreateUserForm;
+import com.ness.app.view.CreateUserForm;
 
 @Entity
 public class User implements UserDetails {

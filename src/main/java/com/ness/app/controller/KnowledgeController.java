@@ -20,7 +20,7 @@ import com.ness.app.domain.model.Knowledge;
 import com.ness.app.exception.KnowledgeNotFountException;
 import com.ness.app.service.AreaService;
 import com.ness.app.service.KnowledgeService;
-import com.ness.app.veiw.EditKnowledgeForm;
+import com.ness.app.view.EditKnowledgeForm;
 
 @Controller
 @RequestMapping("/knowledge")

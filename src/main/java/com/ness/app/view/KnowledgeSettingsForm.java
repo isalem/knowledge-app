@@ -1,4 +1,4 @@
-package com.ness.app.veiw;
+package com.ness.app.view;
 
 import java.util.List;
 

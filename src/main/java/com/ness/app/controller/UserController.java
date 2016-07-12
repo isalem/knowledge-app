@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.ness.app.domain.model.Knowledge;
 import com.ness.app.domain.model.User;
 import com.ness.app.service.UserService;
-import com.ness.app.veiw.CreateUserForm;
-import com.ness.app.veiw.UserSearchForm;
+import com.ness.app.view.CreateUserForm;
+import com.ness.app.view.UserSearchForm;
 
 @Controller
 @RequestMapping("/user")

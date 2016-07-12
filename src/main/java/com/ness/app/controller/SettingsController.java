@@ -22,9 +22,9 @@ import com.ness.app.domain.model.User;
 import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 import com.ness.app.service.KnowledgeService;
 import com.ness.app.service.UserService;
-import com.ness.app.veiw.KnowledgeSettingsForm;
-import com.ness.app.veiw.PasswordSettingsForm;
-import com.ness.app.veiw.ProfileSettingsForm;
+import com.ness.app.view.KnowledgeSettingsForm;
+import com.ness.app.view.PasswordSettingsForm;
+import com.ness.app.view.ProfileSettingsForm;
 
 @Controller
 @RequestMapping("/settings")

@@ -20,7 +20,7 @@ import com.ness.app.persistent.KnowledgeRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class KnowlegeServiceImpl implements KnowledgeService {
+public class KnowledgeServiceImpl implements KnowledgeService {
 
 	@Autowired
 	private KnowledgeRepository knowledgeRepository;
