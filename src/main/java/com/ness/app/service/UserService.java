@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 import com.ness.app.veiw.PasswordSettingsForm;
 import com.ness.app.veiw.ProfileSettingsForm;
 

@@ -1,4 +1,4 @@
-package com.ness.app.domain.wraper;
+package com.ness.app.domain.wrapper;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ness.app.domain.model.Knowledge;
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 
 public interface KnowledgeService {
 	void save(Knowledge knowledge);

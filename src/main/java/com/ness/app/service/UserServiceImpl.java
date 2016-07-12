@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 import com.ness.app.persistent.UserRepository;
 import com.ness.app.veiw.PasswordSettingsForm;
 import com.ness.app.veiw.ProfileSettingsForm;

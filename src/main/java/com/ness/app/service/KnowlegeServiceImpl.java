@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.ness.app.domain.model.Knowledge;
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 import com.ness.app.persistent.KnowledgeRepository;
 
 @Service

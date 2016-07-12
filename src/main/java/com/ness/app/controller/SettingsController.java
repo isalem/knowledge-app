@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ness.app.domain.model.Knowledge;
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 import com.ness.app.service.KnowledgeService;
 import com.ness.app.service.UserService;
 import com.ness.app.veiw.KnowledgeSettingsForm;

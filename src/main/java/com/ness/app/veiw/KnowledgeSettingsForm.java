@@ -2,7 +2,7 @@ package com.ness.app.veiw;
 
 import java.util.List;
 
-import com.ness.app.domain.wraper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.KnowledgeWithSelection;
 
 public class KnowledgeSettingsForm {
 	private List<KnowledgeWithSelection> knowledges;
