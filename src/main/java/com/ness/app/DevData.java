@@ -85,9 +85,9 @@ public class DevData {
 	}
 
 	private void addUsers() {
-		User employ = new User("Alce", "alice@foo.com", "alice", "alice", UserRole.ROLE_EMPLOY);
-		User hr = new User("Bob", "bob@foo.com", "bob", "bob", UserRole.ROLE_HR);
-		User business = new User("Bill", "bill@foo.com", "bill", "bill", UserRole.ROLE_BUSINESS);
+		User employ = new User("Alce", "alice@foo.com", "alice", "123456", UserRole.ROLE_EMPLOY);
+		User hr = new User("Bob", "bob@foo.com", "bob", "123456", UserRole.ROLE_HR);
+		User business = new User("Bill", "bill@foo.com", "bill", "123456", UserRole.ROLE_BUSINESS);
 		
 		userService.save(employ);
 		userService.save(hr);
