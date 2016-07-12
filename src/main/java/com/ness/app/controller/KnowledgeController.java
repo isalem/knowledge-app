@@ -35,7 +35,7 @@ public class KnowledgeController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String knowledgeHome(Principal principal, Model model) {
 		
-		List<Area> areas = (List<Area>) areaService.findAllAreas();
+		List<Area> areas = areaService.findAllAreas();
 		Boolean isAreasEmpty = areas.isEmpty();
 		
 		model.addAttribute("newArea", Area.getEmptyArea());
@@ -54,7 +54,7 @@ public class KnowledgeController extends BaseController {
 	@RequestMapping(value = "/area/{areaTitle:.+}", method = RequestMethod.GET)
 	public String areaPage(@PathVariable String areaTitle, Principal principal, Model model) {
 		
-		List<Area> areas = (List<Area>) areaService.findAllAreas();
+		List<Area> areas = areaService.findAllAreas();
 		Boolean isAreasEmpty = areas.isEmpty();
 		model.addAttribute("isAreasEmpty", isAreasEmpty);
 		model.addAttribute("areas", areas);
