@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ness.app.domain.model.User;
-import com.ness.app.helper.OldPasswordCorrect;
+import com.ness.app.validation.OldPasswordCorrect;
 
 @OldPasswordCorrect
 public class PasswordSettingsForm {
