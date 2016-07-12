@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,16 +29,26 @@ import com.ness.app.view.ProfileSettingsForm;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 	
-	@Autowired
 	private UserRepository userRepository;
+	private AuthenticationManager authenticationManager;
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private AuthenticationManager authenticationManager;
-	
+	public UserServiceImpl(UserRepository userRepository, AuthenticationManager authenticationManager,
+			PasswordEncoder passwordEncoder) {
+		this.userRepository = userRepository;
+		this.authenticationManager = authenticationManager;
+		this.passwordEncoder = passwordEncoder;
+	}
+
 	@Override
 	@Transactional(readOnly = false)
 	@CacheEvict(cacheNames = { "user", "knowledge" }, allEntries = true)
 	public User save(User user) {
+		String rawPassword = user.getPassword();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		user.setPassword(encodedPassword);
+		
 		return userRepository.save(user);
 	}
 
@@ -77,7 +88,11 @@ public class UserServiceImpl implements UserService {
 	@CacheEvict(cacheNames = "user", allEntries = true)
 	public User updateUserPassword(PasswordSettingsForm passwordSettingsForm) {
 		User currentUser = userRepository.findOne(passwordSettingsForm.getId());
-		currentUser.setPassword(passwordSettingsForm.getNewPassword());
+		
+		String rawPassword = passwordSettingsForm.getNewPassword();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		
+		currentUser.setPassword(encodedPassword);
 		currentUser = userRepository.save(currentUser);
 		
 		updatePrincipalFor(currentUser);
