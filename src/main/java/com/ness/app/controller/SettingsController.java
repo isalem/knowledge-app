@@ -38,9 +38,14 @@ public class SettingsController extends BaseController {
 	
 	@RequestMapping(value = { "", "/", "/profile" }, method = RequestMethod.GET)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
-	public String showProfileSettings(@RequestParam("editableUser") String editableUser, Principal principal, Model model) {
+	public String showProfileSettings(
+			@RequestParam("editableUser") String editableUser, 
+			@RequestParam(name = "userUpdated", required = false, defaultValue = "false") Boolean userUpdated, 
+			Model model) {
+		
 		model.addAttribute("activePage", "profile");
 		model.addAttribute("editableUser", editableUser);
+		model.addAttribute("userUpdated", userUpdated);
 		
 		User user = userService.findUserByUsername(editableUser);
 		model.addAttribute("profileSettingsForm", new ProfileSettingsForm(user));
@@ -56,26 +61,29 @@ public class SettingsController extends BaseController {
 			BindingResult result,
 			Model model) {
 		
-		model.addAttribute("activePage", "profile");
 		model.addAttribute("editableUser", profileSettingsForm.getUsername());
 		
 		if (result.hasErrors()) {
 			return "settings/profile";
 		}
 		
-		User updatedUser = userService.updateUserProfile(profileSettingsForm);
-		model.addAttribute("profileSettingsForm", new ProfileSettingsForm(updatedUser));
+		userService.updateUserProfile(profileSettingsForm);
 		
 		model.addAttribute("userUpdated", true);
 		
-		return "settings/profile";
+		return "redirect:/settings/profile";
 	}
 	
 	@RequestMapping(value = "/password", method = RequestMethod.GET)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
-	public String showPasswordSettings(@RequestParam("editableUser") String editableUser, Principal principal, Model model) {
+	public String showPasswordSettings(
+			@RequestParam("editableUser") String editableUser, 
+			@RequestParam(name = "userUpdated", required = false, defaultValue = "false") Boolean userUpdated, 
+			Model model) {
+		
 		model.addAttribute("activePage", "password");
 		model.addAttribute("editableUser", editableUser);
+		model.addAttribute("userUpdated", userUpdated);
 		
 		User user = userService.findUserByUsername(editableUser);
 		model.addAttribute("passwordSettingsForm", new PasswordSettingsForm(user));
@@ -91,27 +99,29 @@ public class SettingsController extends BaseController {
 			BindingResult result,
 			Model model) {
 		
-		model.addAttribute("activePage", "password");
 		model.addAttribute("editableUser", editableUser);
 		
 		if (result.hasErrors()) {
 			return "settings/password";
 		}
 		
-		User updatedUser = userService.updateUserPassword(passwordSettingsForm);
-		model.addAttribute("passwordSettingsForm", new PasswordSettingsForm(updatedUser));
-		
+		userService.updateUserPassword(passwordSettingsForm);
 		model.addAttribute("userUpdated", true);
 		
-		return "settings/password";
+		return "redirect:/settings/password";
 	}
 
 	
 	@RequestMapping(value = "/knowledges", method = RequestMethod.GET)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
-	public String showKnowledgesSettings(@RequestParam("editableUser") String editableUser, Principal principal, Model model) {
+	public String showKnowledgesSettings(
+			@RequestParam("editableUser") String editableUser, 
+			@RequestParam(name = "userUpdated", required = false, defaultValue = "false") Boolean userUpdated,
+			Model model) {
+		
 		model.addAttribute("activePage", "knowledges");
 		model.addAttribute("editableUser", editableUser);
+		model.addAttribute("userUpdated", userUpdated);
 		
 		List<KnowledgeWithSelection> allKnowledgesWithSelectionForUser = 
 				knowledgeService.findAllKnowledgesSelectedForUser(editableUser);
@@ -127,10 +137,8 @@ public class SettingsController extends BaseController {
 			@RequestParam("editableUser") String editableUser,
 			@ModelAttribute KnowledgeSettingsForm knowledgesSettingsForm,
 			BindingResult result,
-			Principal principal,
 			Model model) {
 		
-		model.addAttribute("activePage", "knowledges");
 		model.addAttribute("editableUser", editableUser);
 		
 		if (result.hasErrors()) {
@@ -149,11 +157,6 @@ public class SettingsController extends BaseController {
 		userService.save(user);
 		model.addAttribute("userUpdated", true);
 		
-		List<KnowledgeWithSelection> allKnowledgesWithSelectionForUser = 
-				knowledgeService.findAllKnowledgesSelectedForUser(editableUser);
-		
-		model.addAttribute("knowledgesSettingsForm", new KnowledgeSettingsForm(allKnowledgesWithSelectionForUser));
-		
-		return "settings/knowledges";
+		return "redirect:/settings/knowledges";
 	}
 }
