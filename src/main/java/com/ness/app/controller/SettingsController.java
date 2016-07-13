@@ -1,6 +1,5 @@
 package com.ness.app.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -64,6 +63,8 @@ public class SettingsController extends BaseController {
 		model.addAttribute("editableUser", profileSettingsForm.getUsername());
 		
 		if (result.hasErrors()) {
+			model.addAttribute("activePage", "profile");
+			model.addAttribute("editableUser", editableUser);
 			return "settings/profile";
 		}
 		
@@ -102,6 +103,8 @@ public class SettingsController extends BaseController {
 		model.addAttribute("editableUser", editableUser);
 		
 		if (result.hasErrors()) {
+			model.addAttribute("activePage", "password");
+			model.addAttribute("editableUser", editableUser);
 			return "settings/password";
 		}
 		
@@ -142,6 +145,8 @@ public class SettingsController extends BaseController {
 		model.addAttribute("editableUser", editableUser);
 		
 		if (result.hasErrors()) {
+			model.addAttribute("activePage", "knowledges");
+			model.addAttribute("editableUser", editableUser);
 			return "settings/knowledges";
 		}
 		
