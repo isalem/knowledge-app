@@ -9,24 +9,24 @@ import com.ness.app.domain.model.User;
 import com.ness.app.validation.OldPasswordCorrect;
 import com.ness.app.validation.PasswordConfirmed;
 
-@OldPasswordCorrect
-@PasswordConfirmed
+@OldPasswordCorrect(message = "{OldPasswordCorrect.PasswordSettingsForm}")
+@PasswordConfirmed(message = "{PasswordConfirmed.PasswordSettingsForm}")
 public class PasswordSettingsForm {
 	private Long id;
 
 	@NotNull
-	@NotEmpty
-	@Length(min = 6)
+	@NotEmpty(message = "{NotEmpty.password}")
+	@Length(min = 6, message = "{Length.password}")
 	private String oldPassword;
 	
 	@NotNull
-	@NotEmpty
-	@Length(min = 6)
+	@NotEmpty(message = "{NotEmpty.password}")
+	@Length(min = 6, message = "{Length.password}")
 	private String newPassword;
 	
 	@NotNull
-	@NotEmpty
-	@Length(min = 6)
+	@NotEmpty(message = "{NotEmpty.password}")
+	@Length(min = 6, message = "{Length.password}")
 	private String confirmNewPassword;
 
 	public PasswordSettingsForm() { }

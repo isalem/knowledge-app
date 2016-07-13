@@ -2,6 +2,7 @@ package com.ness.app.view;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,22 +11,24 @@ import com.ness.app.domain.model.UserRole;
 public class CreateUserForm {
 	
 	@NotNull
-	@NotEmpty
-	@Length(max = 100)
+	@NotEmpty(message = "{NotEmpty.name}")
+	@Length(max = 100, message = "{Length.name}")
 	private String name;
 	
 	@NotNull
-	@NotEmpty
-	@Length(max = 100)
+	@NotEmpty(message = "{NotEmpty.email}")
+	@Email(message = "{Email.email}")
+	@Length(max = 100, message = "{Length.email}")
 	private String email;
 	
 	@NotNull
-	@NotEmpty
-	@Length(max = 30)
+	@NotEmpty(message = "{NotEmpty.username}")
+	@Length(max = 30, message = "{Length.username}")
 	private String username;
 	
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "{NotEmpty.password}")
+	@Length(min = 6, message = "{Length.password}")
 	private String password;
 	
 	private UserRole authoritie;

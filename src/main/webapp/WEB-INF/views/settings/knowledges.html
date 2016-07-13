@@ -19,7 +19,6 @@
 				<h3>Edit yours knowledges</h3>
                 <form th:action="@{/settings/knowledges(editableUser=${editableUser})}" th:object="${knowledgesSettingsForm}" method="post">
                 	<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
-						Input error
 					</div>
 					<div class="alert alert-success" th:if="${userUpdated}">
 						Saved successful

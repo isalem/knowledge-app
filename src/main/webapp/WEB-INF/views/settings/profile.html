@@ -21,7 +21,9 @@
                 	  method="post"
                 	  th:object="${profileSettingsForm}">
                 	<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
-						Input error
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+						<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</p>
+						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</p>
 					</div>
 					<div class="alert alert-success" th:if="${userUpdated}">
 						Saved successful
@@ -35,7 +37,7 @@
                 	<div class="form-group"
                 		 th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
                 		<label for="email">Email: </label>
-                		<input type="email" class="form-control" th:field="*{email}" />
+                		<input type="text" class="form-control" th:field="*{email}" />
                 	</div>
                 	<div class="form-group"
                 		 th:classappend="${#fields.hasErrors('username')} ? 'has-error' : ''">
