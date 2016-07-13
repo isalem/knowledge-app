@@ -14,7 +14,7 @@ import com.ness.app.validation.validator.PasswordConfirmedValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PasswordConfirmedValidator.class)
 public @interface PasswordConfirmed {
-	String message() default "{com.ness.app.validation.Passwordconfirmed.message}";
+	String message() default "{com.ness.app.validation.PasswordConfirmed.message}";
 
 	Class<?>[] groups() default { };
 
