@@ -28,7 +28,11 @@
                       method="post"
                       th:object="${userSearchForm}">
                     <div class="form-group">
-                        <input th:field="*{searchRequest}" type="text" class="form-control" placeholder="Search" autocomplete="off" />
+                        <input th:field="*{searchRequest}" 
+                        	   type="text" 
+                        	   class="form-control autocompelete" 
+                        	   placeholder="Search" 
+                        	   autocomplete="off" />
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
@@ -37,6 +41,32 @@
                 </ul>
             </div>
         </div>
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+        	
+        		
+        		var knowledges = new Bloodhound({
+        			  datumTokenizer: Bloodhound.tokenizers.whitespace,
+        			  queryTokenizer: Bloodhound.tokenizers.whitespace,
+        			  
+        			  prefetch: {
+        				  url: [[@{/knowledge/autocomplete}]],
+        				  cache: false
+        				  
+        			  }
+        			});
+        		knowledges.initialize();
+        		
+        		$('.autocompelete').tagsinput({
+        			freeInput: false,
+        			typeaheadjs: {
+        				name: "states",
+        			    source: knowledges.ttAdapter()
+        			}
+        		});
+        	
+        /*]]>*/
+  		</script>
     </nav>
 </div>
 </body>
