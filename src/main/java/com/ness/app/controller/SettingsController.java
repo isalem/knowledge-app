@@ -27,7 +27,7 @@ import com.ness.app.view.ProfileSettingsForm;
 
 @Controller
 @RequestMapping("/settings")
-public class SettingsController extends BaseController {
+public class SettingsController {
 	
 	@Autowired
 	private UserService userService;

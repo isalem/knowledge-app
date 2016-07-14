@@ -31,7 +31,7 @@ import com.ness.app.view.UserSearchForm;
 
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController {
+public class UserController {
 
 	@Autowired
 	private UserService userService;

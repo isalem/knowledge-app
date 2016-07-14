@@ -26,7 +26,7 @@ import com.ness.app.view.EditKnowledgeForm;
 
 @Controller
 @RequestMapping("/knowledge")
-public class KnowledgeController extends BaseController {
+public class KnowledgeController {
 	
 	@Autowired
 	private KnowledgeService knowledgeService;
