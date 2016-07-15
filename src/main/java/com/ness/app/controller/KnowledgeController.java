@@ -2,7 +2,6 @@ package com.ness.app.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ness.app.domain.model.Area;
 import com.ness.app.domain.model.Knowledge;
@@ -85,12 +83,5 @@ public class KnowledgeController {
 		knowledgeService.save(knowledge);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/autocomplete", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody List<String> getAllKnowledgesTitleForAutocomplete() {
-		return knowledgeService.findAll().stream()
-				.map(k -> k.getTitle())
-				.collect(Collectors.toList());
 	}
 }

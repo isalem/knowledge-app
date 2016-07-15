@@ -73,7 +73,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return factoryBean;
 	}
 	
-	
 	@Override
 	public Validator getValidator() {
 		return validatorFactoryBean(messageSource());
