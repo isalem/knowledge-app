@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.ness.app.domain.model.Knowledge;
+import com.ness.app.domain.model.Skill;
 import com.ness.app.domain.model.User;
 import com.ness.app.service.UserService;
 import com.ness.app.view.CreateUserForm;
@@ -45,14 +45,14 @@ public class UserController {
 	@PreAuthorize("#username == principal.username or hasAnyRole('HR', 'BUSINESS')")
 	public String userPage(@PathVariable String username, Model model, Principal principal, HttpSession session) {
 		User user = userService.findUserByUsername(username);
-		Set<Knowledge> knowledges = user.getKnowledges();
-		Boolean isEmptyKnowledges = knowledges.isEmpty();
+		Set<Skill> skills = user.getSkills();
+		Boolean isEmptySkills = skills.isEmpty();
 		
-		Map<String, List<Knowledge>> knowledgesGropedByAreaTitle = knowledges.stream()
+		Map<String, List<Skill>> skillsGropedByAreaTitle = skills.stream()
 				.collect(Collectors.groupingBy(k -> k.getArea().getTitle()));
 		
-		model.addAttribute("isEmptyKnowledges", isEmptyKnowledges);
-		model.addAttribute("knowledgesGropedByAreaTitle", knowledgesGropedByAreaTitle);
+		model.addAttribute("isEmptySkills", isEmptySkills);
+		model.addAttribute("skillsGropedByAreaTitle", skillsGropedByAreaTitle);
 		model.addAttribute("user", user);
 		return "user/user-page";
 	}
@@ -82,8 +82,8 @@ public class UserController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String searchUsers(@ModelAttribute("userSearchForm") UserSearchForm userSearchForm, Principal principal, Model model) {
 		
-		Set<User> usersWithRequestedKnowledges = userService.findUsersWithKnowledges(userSearchForm.getParsedSearchRequest());
-		model.addAttribute("usersWithRequestedKnowledges", usersWithRequestedKnowledges);
+		Set<User> usersWithRequestedSkills = userService.findUsersWithSkills(userSearchForm.getParsedSearchRequest());
+		model.addAttribute("usersWithRequestedSkills", usersWithRequestedSkills);
 		return "user/search";
 	}
 	

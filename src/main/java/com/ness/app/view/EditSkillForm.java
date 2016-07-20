@@ -1,6 +1,6 @@
 package com.ness.app.view;
 
-public class EditKnowledgeForm {
+public class EditSkillForm {
 	private String name;
 	private String value;
 	private Long pk;

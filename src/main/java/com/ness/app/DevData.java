@@ -9,22 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ness.app.domain.model.Area;
-import com.ness.app.domain.model.Knowledge;
+import com.ness.app.domain.model.Skill;
 import com.ness.app.domain.model.User;
 import com.ness.app.domain.model.UserRole;
 import com.ness.app.service.AreaService;
-import com.ness.app.service.KnowledgeService;
+import com.ness.app.service.SkillService;
 import com.ness.app.service.UserService;
 
 @Component
 public class DevData {
 	
 	private UserService userService;
-	private KnowledgeService knowledgeService;
+	private SkillService knowledgeService;
 	private AreaService areaService;
 	
 	@Autowired
-	public DevData(UserService userService, KnowledgeService knowledgeService, AreaService areaService) {
+	public DevData(UserService userService, SkillService knowledgeService, AreaService areaService) {
 		this.userService = userService;
 		this.knowledgeService = knowledgeService;
 		this.areaService = areaService;
@@ -33,10 +33,10 @@ public class DevData {
 	@PostConstruct
 	public void init() {
 		addUsers();
-		addAreasAndKnowledges();
+		addAreasAndSkills();
 	}
 	
-	private void addAreasAndKnowledges() {
+	private void addAreasAndSkills() {
 		Area java = new Area("Java");
 		Area dotNet = new Area(".NET");
 		
@@ -48,17 +48,17 @@ public class DevData {
 		
 		// ===================================================================
 		
-		Knowledge spring = new Knowledge("Spring", null);
-		Knowledge hibernate = new Knowledge("Hibernate", null);
-		Knowledge ef = new Knowledge("Entity Framework", null);
+		Skill spring = new Skill("Spring", null);
+		Skill hibernate = new Skill("Hibernate", null);
+		Skill ef = new Skill("Entity Framework", null);
 		
 		knowledgeService.save(spring);
 		knowledgeService.save(hibernate);
 		knowledgeService.save(ef);
 		
-		spring = knowledgeService.findKnowledgeByTitle("Spring");
-		hibernate = knowledgeService.findKnowledgeByTitle("Hibernate");
-		ef = knowledgeService.findKnowledgeByTitle("Entity Framework");
+		spring = knowledgeService.findSkillByTitle("Spring");
+		hibernate = knowledgeService.findSkillByTitle("Hibernate");
+		ef = knowledgeService.findSkillByTitle("Entity Framework");
 		
 		// ====================================================================
 		
@@ -66,21 +66,21 @@ public class DevData {
 		hibernate.setArea(java);
 		ef.setArea(dotNet);
 		
-		Set<Knowledge> javaKnowledges = new HashSet<>();
-		javaKnowledges.add(spring);
-		javaKnowledges.add(hibernate);
+		Set<Skill> javaSkills = new HashSet<>();
+		javaSkills.add(spring);
+		javaSkills.add(hibernate);
 		
-		Set<Knowledge> dotNetKnowledges = new HashSet<>();
-		dotNetKnowledges.add(ef);
+		Set<Skill> dotNetSkills = new HashSet<>();
+		dotNetSkills.add(ef);
 		
-		java.setKnowledges(javaKnowledges);
+		java.setSkills(javaSkills);
 		areaService.save(java);
 		
-		dotNet.setKnowledges(dotNetKnowledges);
+		dotNet.setSkills(dotNetSkills);
 		areaService.save(dotNet);
 		
 		java = areaService.findAreaByTitle("Java");
-		ef = knowledgeService.findKnowledgeByTitle("Entity Framework");
+		ef = knowledgeService.findSkillByTitle("Entity Framework");
 		
 	}
 

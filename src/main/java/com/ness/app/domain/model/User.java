@@ -45,15 +45,15 @@ public class User implements UserDetails {
 	private UserRole authoritie;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Knowledge> knowledges;
+	private Set<Skill> skills;
 	
-	public User(String name, String email, String username, String password, UserRole authorities, Set<Knowledge> knowledges) {
+	public User(String name, String email, String username, String password, UserRole authorities, Set<Skill> skills) {
 		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.authoritie = authorities;
-		this.knowledges = new HashSet<>(knowledges);
+		this.skills = new HashSet<>(skills);
 	}
 
 	public User(String name, String email, String username, String password, UserRole authoritie) {
@@ -94,12 +94,12 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public Set<Knowledge> getKnowledges() {
-		return knowledges;
+	public Set<Skill> getSkills() {
+		return skills;
 	}
 
-	public void setKnowledges(Set<Knowledge> knowledges) {
-		this.knowledges = knowledges;
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
 	}
 
 	@Override
@@ -161,7 +161,7 @@ public class User implements UserDetails {
 		int result = 1;
 		result = prime * result + ((authoritie == null) ? 0 : authoritie.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((knowledges == null) ? 0 : knowledges.hashCode());
+		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
@@ -185,10 +185,10 @@ public class User implements UserDetails {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (knowledges == null) {
-			if (other.knowledges != null)
+		if (skills == null) {
+			if (other.skills != null)
 				return false;
-		} else if (!knowledges.equals(other.knowledges))
+		} else if (!skills.equals(other.skills))
 			return false;
 		if (name == null) {
 			if (other.name != null)

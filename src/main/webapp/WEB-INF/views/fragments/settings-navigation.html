@@ -10,8 +10,8 @@
 		<li th:classappend="${activePage == 'password'} ? 'active' : ''" role="presentation">
 			<a href="#" th:href="@{/settings/password(editableUser=${editableUser})}">Password</a>
 		</li>
-		<li th:classappend="${activePage == 'knowledges'} ? 'active' : ''" role="presentation">
-			<a href="#" th:href="@{/settings/knowledges(editableUser=${editableUser})}">Knowledges</a>
+		<li th:classappend="${activePage == 'skills'} ? 'active' : ''" role="presentation">
+			<a href="#" th:href="@{/settings/skills(editableUser=${editableUser})}">Skills</a>
 		</li>
 	</ul>
 </body>

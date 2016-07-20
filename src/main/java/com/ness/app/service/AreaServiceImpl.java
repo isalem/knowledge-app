@@ -50,11 +50,11 @@ public class AreaServiceImpl implements AreaService {
 					AutocompleteDto node = new AutocompleteDto();
 					node.setText(area.getTitle());
 					
-					List<AutocompleteChildrenDto> children = area.getKnowledges().stream()
-							.map(knowledge -> {
+					List<AutocompleteChildrenDto> children = area.getSkills().stream()
+							.map(skill -> {
 								AutocompleteChildrenDto child = new AutocompleteChildrenDto();
-								child.setId(knowledge.getKnowledgeId());
-								child.setText(knowledge.getTitle());
+								child.setId(skill.getSkillId());
+								child.setText(skill.getTitle());
 								return child;
 							})
 							.collect(Collectors.toList());

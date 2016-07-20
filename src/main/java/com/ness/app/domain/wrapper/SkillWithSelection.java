@@ -5,53 +5,53 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.ness.app.domain.model.Area;
-import com.ness.app.domain.model.Knowledge;
+import com.ness.app.domain.model.Skill;
 
-public class KnowledgeWithSelection {
+public class SkillWithSelection {
 	
-	public static List<KnowledgeWithSelection> from(List<Knowledge> knowledges) {
-		List<KnowledgeWithSelection> result = new ArrayList<>();
-		for (Knowledge knowledge : knowledges) {
-			KnowledgeWithSelection kws = new KnowledgeWithSelection();
-			kws.setKnowledgeId(knowledge.getKnowledgeId());
-			kws.setTitle(knowledge.getTitle());
-			kws.setArea(knowledge.getArea());
+	public static List<SkillWithSelection> from(List<Skill> skills) {
+		List<SkillWithSelection> result = new ArrayList<>();
+		for (Skill skill : skills) {
+			SkillWithSelection kws = new SkillWithSelection();
+			kws.setSkillId(skill.getSkillId());
+			kws.setTitle(skill.getTitle());
+			kws.setArea(skill.getArea());
 			kws.setSelected(false);
 			result.add(kws);
 		}
 		return result;
 	}
 	
-	public static Comparator<KnowledgeWithSelection> getComparatorWithoutSelectedField() {
+	public static Comparator<SkillWithSelection> getComparatorWithoutSelectedField() {
 		return Comparator
-				.comparing(KnowledgeWithSelection::getKnowledgeId)
-				.thenComparing(KnowledgeWithSelection::getTitle);	
+				.comparing(SkillWithSelection::getSkillId)
+				.thenComparing(SkillWithSelection::getTitle);	
 	}
 	
-	private Long knowledgeId;
+	private Long skillId;
 	private String title;
 	private Area area;
 	private Boolean selected;
 	
-	public KnowledgeWithSelection() { }
+	public SkillWithSelection() { }
 	
-	public KnowledgeWithSelection(String title, Area area, Boolean selected) {
+	public SkillWithSelection(String title, Area area, Boolean selected) {
 		this.selected = selected;
 	}
 	
-	public KnowledgeWithSelection(Knowledge knowledge, Boolean selected) {
-		this.knowledgeId = knowledge.getKnowledgeId();
-		this.title = knowledge.getTitle();
-		this.area = knowledge.getArea();
+	public SkillWithSelection(Skill skill, Boolean selected) {
+		this.skillId = skill.getSkillId();
+		this.title = skill.getTitle();
+		this.area = skill.getArea();
 		this.selected = selected;
 	}
 
-	public Long getKnowledgeId() {
-		return knowledgeId;
+	public Long getSkillId() {
+		return skillId;
 	}
 
-	public void setKnowledgeId(Long knowledgeId) {
-		this.knowledgeId = knowledgeId;
+	public void setSkillId(Long skillId) {
+		this.skillId = skillId;
 	}
 
 	public String getTitle() {
@@ -83,7 +83,7 @@ public class KnowledgeWithSelection {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
-		result = prime * result + ((knowledgeId == null) ? 0 : knowledgeId.hashCode());
+		result = prime * result + ((skillId == null) ? 0 : skillId.hashCode());
 		result = prime * result + ((selected == null) ? 0 : selected.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -97,16 +97,16 @@ public class KnowledgeWithSelection {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		KnowledgeWithSelection other = (KnowledgeWithSelection) obj;
+		SkillWithSelection other = (SkillWithSelection) obj;
 		if (area == null) {
 			if (other.area != null)
 				return false;
 		} else if (!area.equals(other.area))
 			return false;
-		if (knowledgeId == null) {
-			if (other.knowledgeId != null)
+		if (skillId == null) {
+			if (other.skillId != null)
 				return false;
-		} else if (!knowledgeId.equals(other.knowledgeId))
+		} else if (!skillId.equals(other.skillId))
 			return false;
 		if (selected == null) {
 			if (other.selected != null)

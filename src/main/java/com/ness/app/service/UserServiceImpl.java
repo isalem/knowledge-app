@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wrapper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.SkillWithSelection;
 import com.ness.app.persistent.UserRepository;
 import com.ness.app.view.PasswordSettingsForm;
 import com.ness.app.view.ProfileSettingsForm;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = false)
-	@CacheEvict(cacheNames = { "user", "knowledge" }, allEntries = true)
+	@CacheEvict(cacheNames = { "user", "skill" }, allEntries = true)
 	public User save(User user) {
 		String rawPassword = user.getPassword();
 		String encodedPassword = passwordEncoder.encode(rawPassword);
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = false)
-	@CacheEvict(cacheNames = { "user", "knowledge" }, allEntries = true)
+	@CacheEvict(cacheNames = { "user", "skill" }, allEntries = true)
 	public User saveAndLogin(User user) {
 		User savedUser = userRepository.save(user);
 		
@@ -121,12 +121,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<User> findUsersWithKnowledges(Set<String> knowledges) {
+	public Set<User> findUsersWithSkills(Set<String> skills) {
 		
 		Set<User> result = new HashSet<>();
-		for (String knowledge : knowledges) {
+		for (String skill : skills) {
 			
-			List<User> users = userRepository.findAllUsersWithKnowledge(knowledge);
+			List<User> users = userRepository.findAllUsersWithSkill(skill);
 			
 			result.addAll(users);
 			
@@ -135,11 +135,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Cacheable(cacheNames = "user", key = "'knowledges for' + #username")
-	public List<KnowledgeWithSelection> findUsersKnowledgesWithSelection(String username) {
+	@Cacheable(cacheNames = "user", key = "'skills for' + #username")
+	public List<SkillWithSelection> findUsersSkillsWithSelection(String username) {
 		User user = userRepository.findUserByUsername(username);
-		return user.getKnowledges().stream()
-				.map(k -> new KnowledgeWithSelection(k, true))
+		return user.getSkills().stream()
+				.map(k -> new SkillWithSelection(k, true))
 				.collect(Collectors.toList());
 	}
 

@@ -14,13 +14,13 @@
     <nav class="navbar navbar-default" th:fragment="header">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" th:href="@{/}">Knowledges App</a>
+                <a class="navbar-brand" href="#" th:href="@{/}">Skills App</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 	<li th:if="${#authorization.expression('isAnonymous()')}"><a href="#" th:href="@{/user/create}">Create user</a></li>
                     <li th:unless="${#authorization.expression('isAnonymous()')}"><a href="#" th:href="@{'/user/' + ${#authentication.name}}">User</a></li>
-                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}"><a href="#" th:href="@{/knowledge}">Knowledges</a></li>
+                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}"><a href="#" th:href="@{/skill}">Skills</a></li>
                     <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'') or hasRole(''ROLE_BUSINESS'')')}"><a href="#" th:href="@{/search}">Search</a></li>
                 </ul>
                 <!-- 

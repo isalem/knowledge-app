@@ -16,9 +16,9 @@ public class UserSearchForm {
 	}
 	
 	public Set<String> getParsedSearchRequest() {
-		String[] rawRequestedKnowledges = searchRequest.split(",");
-		return Arrays.stream(rawRequestedKnowledges)
-			.map(k -> k.trim())
+		String[] rawRequestedSkills = searchRequest.split(",");
+		return Arrays.stream(rawRequestedSkills)
+			.map(s -> s.trim())
 			.collect(Collectors.toSet());
 	}
 }

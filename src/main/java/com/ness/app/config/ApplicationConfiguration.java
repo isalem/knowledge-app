@@ -24,7 +24,7 @@ public class ApplicationConfiguration {
 		
 		Set<Cache> caches = new HashSet<>();
 		caches.add(new ConcurrentMapCache("user"));
-		caches.add(new ConcurrentMapCache("knowledge"));
+		caches.add(new ConcurrentMapCache("skill"));
 		caches.add(new ConcurrentMapCache("area"));
 		
 		manager.setCaches(caches);

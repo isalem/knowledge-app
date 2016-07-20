@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ness</groupId>
-	<artifactId>knowledges</artifactId>
+	<artifactId>skills-app</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
-	<name>knowledges</name>
+	<name>skills-app</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -24,7 +24,7 @@
 	</repositories>
 
 	<build>
-		<finalName>knowledges</finalName>
+		<finalName>skills-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wrapper.KnowledgeWithSelection;
+import com.ness.app.domain.wrapper.SkillWithSelection;
 import com.ness.app.view.PasswordSettingsForm;
 import com.ness.app.view.ProfileSettingsForm;
 
@@ -18,8 +18,8 @@ public interface UserService extends UserDetailsService {
 	public User saveAndLogin(User user);
 	public User findUserById(Long id);
 	public User findUserByUsername(String username) throws UsernameNotFoundException;
-	public Set<User> findUsersWithKnowledges(Set<String> knowledges);
+	public Set<User> findUsersWithSkills(Set<String> skills);
 	public User updateUserProfile(ProfileSettingsForm profileSettingsForm);
 	public User updateUserPassword(PasswordSettingsForm passwordSettingsForm);
-	public List<KnowledgeWithSelection> findUsersKnowledgesWithSelection(String username);
+	public List<SkillWithSelection> findUsersSkillsWithSelection(String username);
 }

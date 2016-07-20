@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ness.app.domain.model.Area;
-import com.ness.app.domain.model.Knowledge;
-import com.ness.app.exception.KnowledgeNotFountException;
+import com.ness.app.domain.model.Skill;
+import com.ness.app.exception.SkillNotFountException;
 import com.ness.app.service.AreaService;
-import com.ness.app.service.KnowledgeService;
-import com.ness.app.view.EditKnowledgeForm;
+import com.ness.app.service.SkillService;
+import com.ness.app.view.EditSkillForm;
 
 @Controller
-@RequestMapping("/knowledge")
-public class KnowledgeController {
+@RequestMapping("/skill")
+public class SkillController {
 	
 	@Autowired
-	private KnowledgeService knowledgeService;
+	private SkillService skillService;
 	
 	@Autowired
 	private AreaService areaService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String knowledgeHome(Principal principal, Model model) {
+	public String skillHome(Principal principal, Model model) {
 		
 		List<Area> areas = areaService.findAllAreas();
 		Boolean isAreasEmpty = areas.isEmpty();
@@ -42,13 +42,13 @@ public class KnowledgeController {
 		model.addAttribute("areas", areas);
 		model.addAttribute("isAreasEmpty", isAreasEmpty);
 		
-		return "knowledge/area";
+		return "skill/area";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveNewArea(@Valid Area area) {
 		areaService.save(area);
-		return "redirect:/knowledge";
+		return "redirect:/skill";
 	}
 	
 	@RequestMapping(value = "/area/{areaTitle:.+}", method = RequestMethod.GET)
@@ -61,26 +61,26 @@ public class KnowledgeController {
 		
 		Area area = areaService.findAreaByTitle(areaTitle);
 		
-		model.addAttribute("newKnowledge", Knowledge.getEmtyKnowledge());
+		model.addAttribute("newSkill", new Skill());
 		model.addAttribute("activeArea", area.getTitle());
-		model.addAttribute("knowledges", area.getKnowledges());
-		return "knowledge/knowledge";
+		model.addAttribute("skills", area.getSkills());
+		return "skill/skill";
 	}
 	
 	@RequestMapping(value = "/area/{areaTitle:.+}", method = RequestMethod.POST)
-	public String saveNewKnowledge(@PathVariable String areaTitle, @Valid Knowledge knowledge) {
+	public String saveNewSkill(@PathVariable String areaTitle, @Valid Skill skill) {
 		Area area = areaService.findAreaByTitle(areaTitle);
-		knowledge.setArea(area);
-		knowledgeService.save(knowledge);
-		return "redirect:/knowledge/area/" + areaTitle;
+		skill.setArea(area);
+		skillService.save(skill);
+		return "redirect:/skill/area/" + areaTitle;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ResponseEntity<String> editKnowledge(@ModelAttribute EditKnowledgeForm body) {
-		Knowledge knowledge = knowledgeService.findKnowledgeById(body.getPk());
-		if (knowledge == null) throw new KnowledgeNotFountException();
-		knowledge.setTitle(body.getValue());
-		knowledgeService.save(knowledge);
+	public ResponseEntity<String> editSkill(@ModelAttribute EditSkillForm body) {
+		Skill skill = skillService.findSkillById(body.getPk());
+		if (skill == null) throw new SkillNotFountException();
+		skill.setTitle(body.getValue());
+		skillService.save(skill);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

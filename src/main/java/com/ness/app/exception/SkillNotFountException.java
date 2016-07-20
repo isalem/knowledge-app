@@ -3,8 +3,8 @@ package com.ness.app.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Knowledge not found.")
-public class KnowledgeNotFountException extends RuntimeException {
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Skill not found.")
+public class SkillNotFountException extends RuntimeException {
 
 	/**
 	 * 

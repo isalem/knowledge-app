@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
       
 <head>
-    <title>Knowledges settings</title>
+    <title>Skills settings</title>
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
@@ -16,8 +16,8 @@
 				<ul th:replace="fragments/settings-navigation :: settings-navigation"></ul>
 			</div>
 			<div class="col-md-10">
-				<h3>Edit yours knowledges</h3>
-                <form th:action="@{/settings/knowledges(editableUser=${editableUser})}" th:object="${knowledgesSettingsForm}" method="post">
+				<h3>Edit yours skills</h3>
+                <form th:action="@{/settings/skills(editableUser=${editableUser})}" th:object="${skillsSettingsForm}" method="post">
                 	<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
 					</div>
 					<div class="alert alert-success" th:if="${userUpdated}">
@@ -31,13 +31,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="knowledge, stat : *{knowledges}">
-                                <td th:text="${knowledge.title}"></td>
+                            <tr th:each="skill, stat : *{skills}">
+                                <td th:text="${skill.title}"></td>
                                 <td> 
-                                    <input type="checkbox" th:field="*{knowledges[__${stat.index}__].selected}" /> 
-                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].title}" /> 
-                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].knowledgeId}" />
-                                    <input type="hidden" th:field="*{knowledges[__${stat.index}__].area}" /> 
+                                    <input type="checkbox" th:field="*{skills[__${stat.index}__].selected}" /> 
+                                    <input type="hidden" th:field="*{skills[__${stat.index}__].title}" /> 
+                                    <input type="hidden" th:field="*{skills[__${stat.index}__].skillId}" />
+                                    <input type="hidden" th:field="*{skills[__${stat.index}__].area}" /> 
                                 </td>
                             </tr>
                         </tbody>

@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ness.app.domain.model.Knowledge;
+import com.ness.app.domain.model.Skill;
 import com.ness.app.domain.model.User;
-import com.ness.app.domain.wrapper.KnowledgeWithSelection;
-import com.ness.app.service.KnowledgeService;
+import com.ness.app.domain.wrapper.SkillWithSelection;
+import com.ness.app.service.SkillService;
 import com.ness.app.service.UserService;
-import com.ness.app.view.KnowledgeSettingsForm;
+import com.ness.app.view.SkillSettingsForm;
 import com.ness.app.view.PasswordSettingsForm;
 import com.ness.app.view.ProfileSettingsForm;
 
@@ -33,7 +33,7 @@ public class SettingsController {
 	private UserService userService;
 	
 	@Autowired
-	private KnowledgeService knowledgeService;
+	private SkillService skillService;
 	
 	@RequestMapping(value = { "", "/", "/profile" }, method = RequestMethod.GET)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
@@ -115,53 +115,53 @@ public class SettingsController {
 	}
 
 	
-	@RequestMapping(value = "/knowledges", method = RequestMethod.GET)
+	@RequestMapping(value = "/skills", method = RequestMethod.GET)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
-	public String showKnowledgesSettings(
+	public String showSkillsSettings(
 			@RequestParam("editableUser") String editableUser, 
 			@RequestParam(name = "userUpdated", required = false, defaultValue = "false") Boolean userUpdated,
 			Model model) {
 		
-		model.addAttribute("activePage", "knowledges");
+		model.addAttribute("activePage", "skills");
 		model.addAttribute("editableUser", editableUser);
 		model.addAttribute("userUpdated", userUpdated);
 		
-		List<KnowledgeWithSelection> allKnowledgesWithSelectionForUser = 
-				knowledgeService.findAllKnowledgesSelectedForUser(editableUser);
+		List<SkillWithSelection> allSkillsWithSelectionForUser = 
+				skillService.findAllSkillsSelectedForUser(editableUser);
 			
-		model.addAttribute("knowledgesSettingsForm", new KnowledgeSettingsForm(allKnowledgesWithSelectionForUser));
+		model.addAttribute("skillsSettingsForm", new SkillSettingsForm(allSkillsWithSelectionForUser));
 		
-		return "settings/knowledges";
+		return "settings/skills";
 	}
 	
-	@RequestMapping(value = "/knowledges", method = RequestMethod.POST)
+	@RequestMapping(value = "/skills", method = RequestMethod.POST)
 	@PreAuthorize("#editableUser == principal.username or hasRole('HR')")
-	public String updateKnowledgesSettings(
+	public String updateSkillsSettings(
 			@RequestParam("editableUser") String editableUser,
-			@ModelAttribute KnowledgeSettingsForm knowledgesSettingsForm,
+			@ModelAttribute SkillSettingsForm skillsSettingsForm,
 			BindingResult result,
 			Model model) {
 		
 		model.addAttribute("editableUser", editableUser);
 		
 		if (result.hasErrors()) {
-			model.addAttribute("activePage", "knowledges");
+			model.addAttribute("activePage", "skills");
 			model.addAttribute("editableUser", editableUser);
-			return "settings/knowledges";
+			return "settings/skills";
 		}
 		
 		User user = userService.findUserByUsername(editableUser);
 		
-		Set<Knowledge> savedKnowledges = knowledgesSettingsForm.getKnowledges().stream()
+		Set<Skill> savedSkills = skillsSettingsForm.getSkills().stream()
 				.filter(k -> k.getSelected())
-				.map(k -> k.getKnowledgeId())
-				.map(knowledgeService::findKnowledgeById)
+				.map(k -> k.getSkillId())
+				.map(skillService::findSkillById)
 				.collect(Collectors.toSet());
 		
-		user.setKnowledges(savedKnowledges);
+		user.setSkills(savedSkills);
 		userService.save(user);
 		model.addAttribute("userUpdated", true);
 		
-		return "redirect:/settings/knowledges";
+		return "redirect:/settings/skills";
 	}
 }

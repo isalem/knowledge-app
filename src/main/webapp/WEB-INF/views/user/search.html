@@ -12,7 +12,7 @@
 		<div th:replace="fragments/header :: header"></div>
 		
 		<div class="list-group">
-			<a class="list-group-item" th:each="user : ${usersWithRequestedKnowledges}" th:href="@{'/user/' + ${user.username}}" th:text="${user.name}"></a>
+			<a class="list-group-item" th:each="user : ${usersWithRequestedSkills}" th:href="@{'/user/' + ${user.username}}" th:text="${user.name}"></a>
 		</div>
 	</div>
 </body>

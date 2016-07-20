@@ -13,22 +13,12 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-public class Knowledge {
-
-	public static Knowledge getEmtyKnowledgeForArea(Area area) {
-		Knowledge instanse = new Knowledge();
-		instanse.setArea(area);
-		return instanse;
-	}
-	
-	public static Knowledge getEmtyKnowledge() {
-		return new Knowledge();
-	}
+public class Skill {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "knowledge_id")
-	private Long knowledgeId;
+	@Column(name = "skill_id")
+	private Long skillId;
 	
 	@NotNull
 	@Length(max = 100)
@@ -39,19 +29,19 @@ public class Knowledge {
 	@JoinColumn(name = "area_id", referencedColumnName = "area_id")
 	private Area area;
 	
-	public Knowledge(String title, Area area) {
+	public Skill(String title, Area area) {
 		this.title = title;
 		this.area = area;
 	}
 	
-	public Knowledge() { }
+	public Skill() { }
 
-	public Long getKnowledgeId() {
-		return knowledgeId;
+	public Long getSkillId() {
+		return skillId;
 	}
 
-	public void setKnowledgeId(Long knowledgeId) {
-		this.knowledgeId = knowledgeId;
+	public void setSkillId(Long skillId) {
+		this.skillId = skillId;
 	}
 
 	public String getTitle() {
@@ -87,7 +77,7 @@ public class Knowledge {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Knowledge other = (Knowledge) obj;
+		Skill other = (Skill) obj;
 		if (area == null) {
 			if (other.area != null)
 				return false;

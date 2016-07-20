@@ -37,12 +37,12 @@ public class Area {
 	private String description;
 	
 	@OneToMany(mappedBy = "area", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Knowledge> knowledges;
+	private Set<Skill> skills;
 	
-	public Area(String title, String description, Set<Knowledge> knowledges) {
+	public Area(String title, String description, Set<Skill> skills) {
 		this.title = title;
 		this.description = description;
-		this.knowledges = knowledges;
+		this.skills = skills;
 	}
 	
 	public Area(String title) {
@@ -75,12 +75,12 @@ public class Area {
 		this.description = description;
 	}
 
-	public Set<Knowledge> getKnowledges() {
-		return knowledges;
+	public Set<Skill> getSkills() {
+		return skills;
 	}
 
-	public void setKnowledges(Set<Knowledge> knowledges) {
-		this.knowledges = knowledges;
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
 	}
 
 	@Override

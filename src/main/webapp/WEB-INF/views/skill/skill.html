@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Knowledges</title>
+    <title>Skills</title>
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
     
     <script type="text/javascript">
 		$("document").ready(function() {
-			$("#knowledges a").editable({
+			$("#skills a").editable({
 				params: function (params) {
 					params["_csrf"] = $('[name="_csrf"]').first().val();
 					return params;
@@ -27,37 +27,37 @@
     </div>
     
     <div class="panel panel-default">
-        <div class="panel-heading">Add new knowledge</div>
+        <div class="panel-heading">Add new skills</div>
         <div class="panel-body">
-            <form class="form-inline" th:object="${newKnowledge}" th:action="@{'/knowledge/area/' + ${areaTitle}}" method="post" action="#">
+            <form class="form-inline" th:object="${newSkill}" th:action="@{'/skill/area/' + ${areaTitle}}" method="post" action="#">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" th:field="*{title}" required="" />
                 </div>
-                <button type="submit" class="btn btn-default">Add knowledge</button>
+                <button type="submit" class="btn btn-default">Add skill</button>
             </form>
         </div>
     </div>
     
     <ul class="nav nav-tabs" th:unless="${isAreasEmpty}">
         <li role="presentation" th:classappend="${title == activeArea} ? 'active' : ''" th:each="area : ${areas}" th:with="title=${area.getTitle()}">
-            <a href="#" th:href="@{'/knowledge/area/' + ${title}}" 
+            <a href="#" th:href="@{'/skill/area/' + ${title}}" 
                th:text="${title}">
                Area title
             </a>
         </li>
     </ul>
  
-    <ul class="list-group" id="knowledges">
-        <li class="list-group-item" th:each="knowledge : ${knowledges}" >
+    <ul class="list-group" id="skills">
+        <li class="list-group-item" th:each="skill : ${skills}" >
         	<a href="#"
-        	   th:text="${knowledge.getTitle()}"
+        	   th:text="${skill.getTitle()}"
 	           data-type="text"
-	           data:pk="${knowledge.knowledgeId}"
-	           data-name="knowledge"
-	           data:url="@{/knowledge/edit}"
-	           data-original-title="Knowledge's title">
-        	   Knowledge
+	           data:pk="${skill.skillId}"
+	           data-name="skill"
+	           data:url="@{/skill/edit}"
+	           data-original-title="Skill's title">
+        	   Skill
         	</a>
         </li>
     </ul>
