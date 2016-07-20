@@ -9,7 +9,7 @@
 
 <body>
 	<div class="container">
-		<div th:replace="fragments/header :: header"></div>
+		<div th:replace="fragments/nivagation :: nivagation"></div>
 		
 		<div class="list-group">
 			<a class="list-group-item" th:each="user : ${usersWithRequestedSkills}" th:href="@{'/user/' + ${user.username}}" th:text="${user.name}"></a>
