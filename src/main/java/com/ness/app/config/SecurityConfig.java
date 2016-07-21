@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/resources/**", "/", "/user/create").permitAll()
+				.antMatchers("/dashboard/**").hasAnyRole("HR")
 				.antMatchers("/skill/**").hasAnyRole("HR")
 				.antMatchers("/user/search").hasAnyRole("HR", "BUSINESS")
 				.anyRequest().authenticated()

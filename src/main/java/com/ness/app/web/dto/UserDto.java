@@ -16,7 +16,7 @@ public class UserDto {
 		this.name = user.getName();
 		this.username = user.getUsername();
 		this.email = user.getEmail();
-		this.authoritie = user.getAuthoritie().getAuthority();
+		this.authoritie = user.getAuthoritie().getDescription();
 	}
 	
 	public Long getId() {

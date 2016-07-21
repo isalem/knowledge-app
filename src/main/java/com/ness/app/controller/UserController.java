@@ -74,7 +74,7 @@ public class UserController {
 		}
 		
 		User newUser = new User(createUserForm);
-		newUser = userService.saveAndLogin(newUser);
+		newUser = userService.save(newUser);
 		
 		return "redirect:/user/" + newUser.getUsername();
 	}

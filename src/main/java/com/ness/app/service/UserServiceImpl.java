@@ -1,5 +1,6 @@
 package com.ness.app.service;
 
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.ness.app.domain.model.User;
 import com.ness.app.domain.wrapper.SkillWithSelection;
 import com.ness.app.persistent.UserRepository;
@@ -56,8 +60,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = false)
 	@CacheEvict(cacheNames = { "user", "skill" }, allEntries = true)
 	public User saveAndLogin(User user) {
-		User savedUser = userRepository.save(user);
-		
+		User savedUser = this.save(user);
+			
 		UsernamePasswordAuthenticationToken token = 
 				new UsernamePasswordAuthenticationToken(savedUser.getUsername(), savedUser.getPassword());
 		
@@ -66,6 +70,16 @@ public class UserServiceImpl implements UserService {
 		securityContext.setAuthentication(authentication);
 		
 		return savedUser;
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		return Lists.newArrayList(userRepository.findAll());
+	}
+
+	@Override
+	public Page<User> findAllUsers(Pageable pageable) {
+		return userRepository.findAll(pageable);
 	}
 
 	@Override

@@ -3,11 +3,11 @@ package com.ness.app.persistent;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ness.app.domain.model.User;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	User findUserByEmail(String email);
 	User findUserByName(String name);
 	User findUserByUsername(String username);

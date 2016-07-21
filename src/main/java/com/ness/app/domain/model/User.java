@@ -120,7 +120,7 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 	
-	public GrantedAuthority getAuthoritie() {
+	public UserRole getAuthoritie() {
 		return authoritie;
 	}
 

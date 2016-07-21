@@ -12,41 +12,7 @@
 		<h1>Create new user</h1>
 		<div class="row">
 			<div class="col-md-4">
-				<form action="#" th:action="@{/user/create}" th:object="${createUserForm}" method="post">
-					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
-						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
-						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</p>
-						<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</p>
-						<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</p>
-					</div>
-			    	<div class="form-group"
-			    		 th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
-			    		<label for="name">Name: </label>
-			    		<input class="form-control" type="text" th:field="*{name}" />
-			    	</div>
-			    	<div class="form-group"
-			    		 th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
-			    		<label for="text">Email: </label>
-			            <input class="form-control" type="email" th:field="*{email}" />
-			    	</div>
-			    	<div class="form-group"
-			    		 th:classappend="${#fields.hasErrors('username')} ? 'has-error' : ''">
-			    		<label for="username">Username: </label>
-			            <input class="form-control" type="text" th:field="*{username}" />
-			    	</div>
-			    	<div class="form-group"
-			    		 th:classappend="${#fields.hasErrors('password')} ? 'has-error' : ''">
-			    		<label for="password">Password: </label>
-			            <input class="form-control" type="password" th:field="*{password}" />
-			    	</div>
-			    	<div class="form-group">
-			    		<label for="authoritie">Role: </label>
-			    		<select class="form-control" th:field="*{authoritie}">
-                        	<option th:each="authoritie : ${T(com.ness.app.domain.model.UserRole).values()}" th:value="${authoritie}" th:text="${authoritie.getDescription()}"></option>
-			            </select>
-			    	</div>
-			        <button type="submit" class="btn btn-default">Create</button>
-    			</form>
+				<form th:replace="user/fragments/create-user-form :: create-user-form(url=@{/user/create}, createUserForm=${createUserForm})"></form>
 			</div>
 		</div>
 	</div>
