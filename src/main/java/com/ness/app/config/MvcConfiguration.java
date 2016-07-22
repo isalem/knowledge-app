@@ -36,28 +36,28 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setCacheable(false);
 		return resolver;
 	}
-	
+
 	@Bean
 	public SpringTemplateEngine templateEngine(ServletContextTemplateResolver resolver) {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setTemplateResolver(resolver);
-		
+
 		Set<IDialect> additionalDialects = new HashSet<>();
 		additionalDialects.add(new SpringSecurityDialect());
 		additionalDialects.add(new DataAttributeDialect());
-		
+
 		engine.setAdditionalDialects(additionalDialects);
 		return engine;
 	}
-	
+
 	@Bean
-	public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
+	public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine);
 		viewResolver.setCache(false);
 		return viewResolver;
 	}
-	
+
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -65,14 +65,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		source.setDefaultEncoding("UTF-8");
 		return source;
 	}
-	
+
 	@Bean
 	public LocalValidatorFactoryBean validatorFactoryBean(MessageSource messageSource) {
 		LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
 		factoryBean.setValidationMessageSource(messageSource);
 		return factoryBean;
 	}
-	
+
 	@Override
 	public Validator getValidator() {
 		return validatorFactoryBean(messageSource());
