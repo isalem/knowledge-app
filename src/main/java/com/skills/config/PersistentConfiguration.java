@@ -60,7 +60,7 @@ public class PersistentConfiguration {
 		LocalContainerEntityManagerFactoryBean embf = new LocalContainerEntityManagerFactoryBean();
 		embf.setDataSource(dataSource);
 		embf.setJpaVendorAdapter(adapter);
-		embf.setPackagesToScan("com.ness.app");
+		embf.setPackagesToScan("com.skills");
 		return embf;
 	}
 	
