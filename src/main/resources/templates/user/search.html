@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-      
+>
+
 <head>
     <title>Search users</title>
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
 <body>
-	<div class="container">
-		<div th:replace="fragments/nivagation :: nivagation"></div>
-		
-		<div class="list-group">
-			<a class="list-group-item" th:each="user : ${usersWithRequestedSkills}" th:href="@{'/user/' + ${user.username}}" th:text="${user.name}"></a>
-		</div>
-	</div>
+<div class="container">
+    <div th:replace="fragments/nivagation :: nivagation"></div>
+
+    <div class="list-group">
+        <a class="list-group-item" th:each="user : ${usersWithRequestedSkills}" th:href="@{'/user/' + ${user.username}}"
+           th:text="${user.name}"></a>
+    </div>
+</div>
 </body>
 </html>

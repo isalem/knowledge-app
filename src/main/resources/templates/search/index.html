@@ -1,87 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-      
+>
+
 <head>
     <title>User page</title>
-    
+
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
 <body>
-    <div class="container">
-        <div th:replace="fragments/nivagation :: nivagation"></div>
-       	
-       	<div class="page-header">
-        	<h1>Search users</h1>
-   		</div>
-   		
-		<form id="search-form" th:action="@{/search/result}" method="post">
-   		<div class="input-group input-group-lg select2-bootstrap-append">       		
-			<select id="single-prepend-text" class="form-control autocomplete" multiple="multiple">
-			</select>
-			
-			<span class="input-group-btn">
+<div class="container">
+    <div th:replace="fragments/nivagation :: nivagation"></div>
+
+    <div class="page-header">
+        <h1>Search users</h1>
+    </div>
+
+    <form id="search-form" th:action="@{/search/result}" method="post">
+        <div class="input-group input-group-lg select2-bootstrap-append">
+            <select id="single-prepend-text" class="form-control autocomplete" multiple="multiple">
+            </select>
+
+            <span class="input-group-btn">
 				<button class="btn btn-default" type="submit" data-select2-open="single-prepend-text">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</span>
 
-		</div>
-   		</form>
-   		<br />
-   		<div id="search-result" class="list-group"></div>
-    </div>
-    
-    <script th:inline="javascript">
+        </div>
+    </form>
+    <br/>
+    <div id="search-result" class="list-group"></div>
+</div>
+
+<script th:inline="javascript">
     /*<![CDATA[*/
-        $(document).ready(function() {
-        	$('#search-form').submit(function (event) {
-        		event.preventDefault();
-        		
-        		var data = $.map($('.autocomplete').select2('data'), function (item) {
-        			return {
-        				id: item.id,
-        				text: item.text
-        			}
-        		});
-        		
-        		$.ajax({
-        			url: [[@{/search/result}]],
-        			method: 'POST',
-        			contentType: 'application/json; charset=utf-8',
-        			data: JSON.stringify(data),
-        			processData: false,
-        			beforeSend: function (xhr) {
-        				xhr.setRequestHeader('X-CSRF-TOKEN', $("input[name='_csrf']").first().val());
-        			},
-        			success: function (response) {
-        				console.log(response);
-        				$('#search-result').empty();
-        				
-        				response.forEach(function (element, index, array) {
-        					var urlPrefix = [[@{/user/}]];
-        					var html = '<a class="list-group-item" href="' + urlPrefix + element.username + '">' + element.name + '</a>' ;
-        					
-        					$('#search-result').append(html);
-        				});
-        			}
-        		})
-        		
-        	})
-        	
-  			$(".autocomplete").select2({
-  				placeholder: "Search by skills",
-  				theme: "bootstrap",
-  				data: JSON.parse($.ajax({
-  					url: [[@{/search/autocomplete}]],
-  					async: false,
-  					cache: true
-  				}).responseText)
-  			});
-		});
+    $(document).ready(function () {
+        $('#search-form').submit(function (event) {
+            event.preventDefault();
+
+            var data = $.map($('.autocomplete').select2('data'), function (item) {
+                return {
+                    id: item.id,
+                    text: item.text
+                }
+            });
+
+            $.ajax({
+                url: [[@{
+                /search/
+                result
+            }
+            ]],
+            method: 'POST',
+                contentType
+            :
+            'application/json; charset=utf-8',
+                data
+            :
+            JSON.stringify(data),
+                processData
+            :
+            false,
+                beforeSend
+            :
+            function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("input[name='_csrf']").first().val());
+            }
+
+            ,
+            success: function (response) {
+                console.log(response);
+                $('#search-result').empty();
+
+                response.forEach(function (element, index, array) {
+                    var urlPrefix = [[@{
+                        /user/
+                    }
+                    ]]
+                    ;
+                    var html = '<a class="list-group-item" href="' + urlPrefix + element.username + '">' + element.name + '</a>';
+
+                    $('#search-result').append(html);
+                });
+            }
+        })
+
+        })
+
+        $(".autocomplete").select2({
+            placeholder: "Search by skills",
+            theme: "bootstrap",
+            data: JSON.parse($.ajax({
+                url: [[@{
+            /search/
+            autocomplete
+        }
+        ]],
+        async: false,
+            cache
+        :
+        true
+    }).
+        responseText
+        )
+    })
+        ;
+    });
     /*]]>*/
-	</script>
-	
+</script>
+
 </body>
 </html>

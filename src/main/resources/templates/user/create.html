@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <title>Create new user</title>
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
 <body>
-	<div class="container">
-		<div th:replace="fragments/nivagation :: nivagation"></div>
-		<h1>Create new user</h1>
-		<div class="row">
-			<div class="col-md-4">
-				<form th:replace="user/fragments/create-user-form :: create-user-form(url=@{/user/create}, createUserForm=${createUserForm})"></form>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <div th:replace="fragments/nivagation :: nivagation"></div>
+    <h1>Create new user</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form th:replace="user/fragments/create-user-form :: create-user-form(url=@{/user/create}, createUserForm=${createUserForm})"></form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

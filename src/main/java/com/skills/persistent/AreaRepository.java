@@ -1,9 +1,8 @@
 package com.skills.persistent;
 
+import com.skills.domain.model.Area;
 import org.springframework.data.repository.CrudRepository;
 
-import com.skills.domain.model.Area;
-
 public interface AreaRepository extends CrudRepository<Area, Long> {
-	Area findAreaByTitle(String title);
+    Area findAreaByTitle(String title);
 }

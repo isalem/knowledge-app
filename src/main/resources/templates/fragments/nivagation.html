@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 
 <head>
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/bootstrap.min.css}"/>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../../../resources/js/bootstrap.min.js"></script>
 </head>
@@ -18,11 +19,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                	<li th:if="${#authorization.expression('isAnonymous()')}"><a href="#" th:href="@{/user/create}">Create user</a></li>
-                    <li th:unless="${#authorization.expression('isAnonymous()')}"><a href="#" th:href="@{'/user/' + ${#authentication.name}}">User</a></li>
-                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}"><a href="#" th:href="@{/dashboard}">Dashboard</a></li>
-                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}"><a href="#" th:href="@{/skill}">Skills</a></li>
-                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'') or hasRole(''ROLE_BUSINESS'')')}"><a href="#" th:href="@{/search}">Search</a></li>
+                    <li th:if="${#authorization.expression('isAnonymous()')}"><a href="#" th:href="@{/user/create}">Create
+                        user</a></li>
+                    <li th:unless="${#authorization.expression('isAnonymous()')}"><a href="#"
+                                                                                     th:href="@{'/user/' + ${#authentication.name}}">User</a>
+                    </li>
+                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}">
+                        <a href="#" th:href="@{/dashboard}">Dashboard</a></li>
+                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'')')}">
+                        <a href="#" th:href="@{/skill}">Skills</a></li>
+                    <li th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'') or hasRole(''ROLE_BUSINESS'')')}">
+                        <a href="#" th:href="@{/search}">Search</a></li>
                 </ul>
                 <!-- 
                 <form th:if="${#authorization.expression('isAuthenticated() and not isAnonymous() and hasRole(''ROLE_HR'') or hasRole(''ROLE_BUSINESS'')')}"
@@ -41,7 +48,11 @@
                 </form>
                  -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><form th:replace="fragments/login-logout :: ${#authorization.expression('isAuthenticated() and not isAnonymous()')} ? 'logout' : 'login'"> Sign in</form></li>
+                    <li>
+                        <form th:replace="fragments/login-logout :: ${#authorization.expression('isAuthenticated() and not isAnonymous()')} ? 'logout' : 'login'">
+                            Sign in
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -10,87 +10,96 @@
 <!-- Header -->
 <div class="container">
     <div th:replace="fragments/nivagation :: nivagation"></div>
-    
+
     <div class="row">
-    	<div class="col-md-2">
-    		<ul th:replace="dashboard/fragments/dashboard-navigation :: dashboard-navigation"></ul>
-    	</div>
-    	
-    	<div class="col-md-10">
-    		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-user">New user</button>
-    		<a id="user-edit-button" href="#" role="button" class="btn btn-default">Edit user</a>
-    		<div id="table-of-users"></div>
-    	</div>
+        <div class="col-md-2">
+            <ul th:replace="dashboard/fragments/dashboard-navigation :: dashboard-navigation"></ul>
+        </div>
+
+        <div class="col-md-10">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-user">New user</button>
+            <a id="user-edit-button" href="#" role="button" class="btn btn-default">Edit user</a>
+            <div id="table-of-users"></div>
+        </div>
     </div>
-    
+
     <div class="modal fade" id="new-user" tabindex="-1" role="dialog" aria-labelledby="new-userLabel">
-		<div class="modal-dialog" role="document">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4 class="modal-title" id="myModalLabel">Add new user</h4>
-	      		</div>
-	      		<div class="modal-body">
-	        		<form th:replace="user/fragments/create-user-form :: create-user-form(url=@{/dashboard/new-user}, createUserForm=${createUserForm})"></form>
-	      		</div>
-		      	
-	    	</div>
-		</div>
-	</div>
-    
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add new user</h4>
+                </div>
+                <div class="modal-body">
+                    <form th:replace="user/fragments/create-user-form :: create-user-form(url=@{/dashboard/new-user}, createUserForm=${createUserForm})"></form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script th:inline="javascript">
-    /*<![CDATA[*/
-    $(document).ready(function () { 
-    	var urlPrefix = [[@{/}]];
-    	var tableOfUsersUrl = [[@{/dashboard/table-of-users(page=0,size=10)}]];
-    	
-    	var loadTableOfUsers = function (url) {
-    		$('#table-of-users').load(url, function() {
-            	$('#table-of-users tbody').on('click', 'tr', function (event) {
-            		if ($(this).hasClass('active')) {
-            			$(this).removeClass('active');
-            			$('#user-edit-button').attr('href', '#');
-            		} else {
-            			$(this).addClass('active').siblings().removeClass('active');            		
-                		$('#user-edit-button').attr('href', urlPrefix + 'settings?editableUser=' + $('.active .username-row').text());
-            		}
-            		
+        /*<![CDATA[*/
+        $(document).ready(function () {
+            var urlPrefix = [[@{/
+            }
+            ]]
+            ;
+            var tableOfUsersUrl = [[@{
+                /dashboard/
+                table - of - users(page = 0, size = 10)
+            }
+            ]]
+            ;
+
+            var loadTableOfUsers = function (url) {
+                $('#table-of-users').load(url, function () {
+                    $('#table-of-users tbody').on('click', 'tr', function (event) {
+                        if ($(this).hasClass('active')) {
+                            $(this).removeClass('active');
+                            $('#user-edit-button').attr('href', '#');
+                        } else {
+                            $(this).addClass('active').siblings().removeClass('active');
+                            $('#user-edit-button').attr('href', urlPrefix + 'settings?editableUser=' + $('.active .username-row').text());
+                        }
+
+                    });
                 });
-            });
-    	};
-    	
-        var processUserForm = function () {
-        	 var form = $('#create-user-form');
-             form.on('submit', function (e) {
-             	e.preventDefault();
-             	$.ajax({
-             		url: form.attr('action'),
-             		type: 'post',
-            	      	data: form.serialize(),
-            	      	success: function(response) {
-            	      		console.log(response);	
-            	      			
-            	        	if ($(response.trim()).find('.has-error').length) {
-            	        		form.unbind('submit');
-            	          		form.replaceWith(response);
-            	          		processUserForm();
-            	        	} else {
-            	        		console.log('Success');
-            	        		$('#table-of-users tbody').unbind('click');
-            	        		loadTableOfUsers(tableOfUsersUrl);
-            	        		$('#new-user').modal('toggle');
-     					}
-     				}
-             	});
-             });
-        };
-        
-        loadTableOfUsers(tableOfUsersUrl);
-        processUserForm();
-       
-    });      
-    /*]]>*/
-	</script>
+            };
+
+            var processUserForm = function () {
+                var form = $('#create-user-form');
+                form.on('submit', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: 'post',
+                        data: form.serialize(),
+                        success: function (response) {
+                            console.log(response);
+
+                            if ($(response.trim()).find('.has-error').length) {
+                                form.unbind('submit');
+                                form.replaceWith(response);
+                                processUserForm();
+                            } else {
+                                console.log('Success');
+                                $('#table-of-users tbody').unbind('click');
+                                loadTableOfUsers(tableOfUsersUrl);
+                                $('#new-user').modal('toggle');
+                            }
+                        }
+                    });
+                });
+            };
+
+            loadTableOfUsers(tableOfUsersUrl);
+            processUserForm();
+
+        });
+        /*]]>*/
+    </script>
 </div>
 </body>
 </html>

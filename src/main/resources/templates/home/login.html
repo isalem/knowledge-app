@@ -8,34 +8,36 @@
 
 <body>
 
-    <div class="container">
-    	<div th:replace="fragments/nivagation :: nivagation"></div>
-    	<div class="row">
-    		<div class="col-md-6 col-md-offset-3">
-    			<form class="form-signin" action="#" th:action="@{/login}" method="post">
-		            <h2 class="form-signin-heading">Please sign in</h2>
-		            <div th:if="${param.error}" class="alert alert-danger" role="alert">
-		                Invalid username and password.
-		            </div>
-		             <div th:if="${param.logout}" class="alert alert-success" role="alert"> 
-		                You have been logged out.
-		            </div>
-		            <label for="username" class="sr-only">Username</label>
-		            <input id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="" type="text" />
-		            <label for="password" class="sr-only">Password</label>
-		            <input id="password" name="password" class="form-control" placeholder="Password" required="" type="password" />
-		            <!-- 
-		            <div class="checkbox">
-		                <label>
-		                    <input value="remember-me" type="checkbox"> Remember me
-		                </label>
-		            </div>
-		            -->
-		            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        		</form>
-    		</div>
-    	</div>
+<div class="container">
+    <div th:replace="fragments/nivagation :: nivagation"></div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-signin" action="#" th:action="@{/login}" method="post">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                    You have been logged out.
+                </div>
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" name="username" class="form-control" placeholder="Username" required=""
+                       autofocus="" type="text"/>
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" class="form-control" placeholder="Password" required=""
+                       type="password"/>
+                <!--
+                <div class="checkbox">
+                    <label>
+                        <input value="remember-me" type="checkbox"> Remember me
+                    </label>
+                </div>
+                -->
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
     </div>
+</div>
 
 </body>
 </html>

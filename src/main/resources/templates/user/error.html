@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-      
+>
+
 <head>
     <title>Error</title>
     <object th:replace="fragments/deps :: deps" th:remove="tag"></object>
 </head>
 
 <body>
-    <div class="container" th:object="${user}">
-        <div class="jumbotron">
+<div class="container" th:object="${user}">
+    <div class="jumbotron">
         <p>User not found</p>
     </div>
-    </div>
+</div>
 </body>
 </html>

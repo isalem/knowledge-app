@@ -14,28 +14,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-		source.setBasename("WEB-INF/i18n/skillmsg");
-		source.setDefaultEncoding("UTF-8");
-		return source;
-	}
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasename("WEB-INF/i18n/skillmsg");
+        source.setDefaultEncoding("UTF-8");
+        return source;
+    }
 
-	@Bean
-	public LocalValidatorFactoryBean validatorFactoryBean(MessageSource messageSource) {
-		LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
-		factoryBean.setValidationMessageSource(messageSource);
-		return factoryBean;
-	}
+    @Bean
+    public LocalValidatorFactoryBean validatorFactoryBean(MessageSource messageSource) {
+        LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
+        factoryBean.setValidationMessageSource(messageSource);
+        return factoryBean;
+    }
 
-	@Override
-	public Validator getValidator() {
-		return validatorFactoryBean(messageSource());
-	}
+    @Override
+    public Validator getValidator() {
+        return validatorFactoryBean(messageSource());
+    }
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
 }
